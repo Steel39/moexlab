@@ -6,12 +6,16 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
+        "ext-pdo": "*",
+        "glushkovds/phpclickhouse-laravel": "^2.1",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "metaseller/tinkoff-invest-api-v2-php": "^0.4.13",
+        "php-amqplib/php-amqplib": "^2.8",
+        "smi2/phpclickhouse": "^1.6",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

@@ -1,7 +1,6 @@
 version: '3.8'
 services:
 
-  # Backend контейнер
   backend:
     build:
       context: .
@@ -21,7 +20,6 @@ services:
       - clickhouse
     container_name: "${BACKEND_CONTAINER_NAME}"
 
-  # Nginx контейнер для вебсервера
   nginx:
     image: nginx:alpine
     restart: unless-stopped
@@ -35,7 +33,6 @@ services:
       - backend
     container_name: "${WEBSERVER_CONTAINER_NAME}"
 
-  # MySQL контейнер
   db:
     image: mysql:8.0.14
     restart: unless-stopped
@@ -55,7 +52,6 @@ services:
       test: [ "CMD", "mysqladmin", "ping" ]
     container_name: "${DB_CONTAINER_NAME}"
 
-  # Для сборки js
   node:
     build:
       context: .
@@ -68,7 +64,6 @@ services:
       - .:/var/www
     container_name: "${FRONTEND_CONTAINER_NAME}"
 
-  # Redis контейнер
   redis:
     image: redis:latest
     restart: always
@@ -85,13 +80,12 @@ services:
     depends_on:
       - db
 
-  # RabbitMQ контейнер
   rabbitmq:
     image: rabbitmq:management
     restart: unless-stopped
     ports:
-      - "5672:5672"  # RabbitMQ default port
-      - "15672:15672" # RabbitMQ management UI
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USERNAME}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
@@ -101,11 +95,13 @@ services:
   clickhouse:
     image: yandex/clickhouse-server
     ports:
-      - "8123:8123"  # ClickHouse HTTP interface
-      - "9000:9000"  # ClickHouse native interface
+      - "8123:8123"
+      - "9000:9000"
     volumes:
-      - ./db/clickhouse:/var/lib/clickhouse  # Данные ClickHouse
+      - ./db/clickhouse:/var/lib/clickhouse
+      - ./docker/clickhouse/config.xml:/etc/clickhouse-server/config.d/config.xml
     environment:
       CLICKHOUSE_USER: "${CLICKHOUSE_USERNAME}"
       CLICKHOUSE_PASSWORD: "${CLICKHOUSE_PASSWORD}"
+      CLICKHOUSE_DATABASE: "${CLICKHOUSE_DATABASE}"
     container_name: "${CLICKHOUSE_CONTAINER_NAME}"
