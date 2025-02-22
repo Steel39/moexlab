@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
-use App\Domain\Instrument\Share\ShareRepositoryInterface;
+
+use App\Domain\Instrument\Share\Repository\ReadShareRepositoryInterface;
+use App\Domain\Instrument\Share\Repository\WriteShareRepositoryInterface;
 use App\Domain\Market\Trade\TradeRepositoryInterface;
+use App\Infrastructure\Repositories\Clickhouse\Instrument\ClickhouseInstrumentRepository;
+use App\Infrastructure\Repositories\Clickhouse\Market\ClickHouseTradeRepository;
 use App\Infrastructure\Repositories\Mysql\Instrument\LocalSharesRepository;
-use App\Infrastructure\Repositories\Redis\Market\Trade\TradeCacheRepository;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,8 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ShareRepositoryInterface::class, LocalSharesRepository::class);
-        $this->app->bind(TradeRepositoryInterface::class, TradeCacheRepository::class);
+        $this->app->bind(ReadShareRepositoryInterface::class, ClickhouseInstrumentRepository::class);
+        $this->app->bind(WriteShareRepositoryInterface::class, ClickhouseInstrumentRepository::class);
+        $this->app->bind(TradeRepositoryInterface::class, ClickHouseTradeRepository::class);
     }
 
     /**

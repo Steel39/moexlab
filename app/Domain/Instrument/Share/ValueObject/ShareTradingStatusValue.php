@@ -7,13 +7,9 @@ use Tinkoff\Invest\V1\SecurityTradingStatus;
 readonly class ShareTradingStatusValue implements ShareValueInterface
 {
     public function __construct(
-        private readonly int $tradingStatus,
+        public readonly int $tradingStatus,
     )
     {
-    }
-    public function getValue(): int
-    {
-        return $this->tradingStatus;
     }
 
     public function toString(): string

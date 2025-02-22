@@ -11,7 +11,7 @@
         <main class="py-10">
             <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Карточка 1 -->
-                <button>
+                <button @click="getShares">
                     <div class="bg-white shadow rounded-lg p-6 hover:bg-gray-100 hover:shadow-md duration-200">
                         <h2 class="text-xl font-semibold">Акции</h2>
                         <p class="mt-2 text-gray-600">Здесь вы можете увидеть данные по сделкам на Московской бирже.</p>
@@ -37,11 +37,13 @@
 <script setup>
 
 import Welcome from "@/Pages/Welcome.vue";
-import {useForm} from "@inertiajs/vue3";
-const form = useForm;
+import { useForm } from "@inertiajs/vue3";
+const form = useForm({});
 
 const getShares = () => {
-
+    form.get( route('guest_trades'), {
+        preserveScroll: true,
+    });
 }
 
 </script>

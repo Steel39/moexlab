@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Clickhouse;
 
 use App\Infrastructure\Repositories\Clickhouse\Migration\Rabbit\DeleteTableTradesQueue;
+use App\Infrastructure\Repositories\Clickhouse\Migration\TInvestApi\Instrument\Shares\DeleteSharesTable;
 use ClickHouseDB\Exception\ClickHouseException;
 use Illuminate\Console\Command;
 
@@ -25,7 +26,12 @@ class RollbackCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(DeleteTableTradesQueue $tradesQueue)
-    {$tradesQueue->down();
+    public function handle(
+        DeleteTableTradesQueue $tradesQueue,
+        DeleteSharesTable $sharesTable
+    )
+    {
+        $tradesQueue->down();
+        $sharesTable->down();
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Infrastructure\Repositories\Mysql\Instrument;
 
+use App\Domain\Instrument\InstrumentRepositoryInterface;
 use App\Domain\Instrument\Share\Share;
-use App\Domain\Instrument\Share\ShareRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
-class LocalSharesRepository implements ShareRepositoryInterface
+class LocalSharesRepository implements InstrumentRepositoryInterface
 {
     const array CHECK_FIELD = ['uid'];
     const array UPDATE_FIELD = [

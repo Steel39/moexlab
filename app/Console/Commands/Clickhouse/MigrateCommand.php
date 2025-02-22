@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Clickhouse;
 
 use App\Infrastructure\Repositories\Clickhouse\Migration\Rabbit\CreateTableTradesQueue;
+use App\Infrastructure\Repositories\Clickhouse\Migration\TInvestApi\Instrument\Shares\CreateTableShares;
 use Illuminate\Console\Command;
 
 class MigrateCommand extends Command
@@ -25,9 +26,12 @@ class MigrateCommand extends Command
      * Execute the console command.
      */
     public function handle(
-         CreateTableTradesQueue $tradesQueue
+        CreateTableTradesQueue $tradesQueue,
+        CreateTableShares $tableShares
+
     ): void
     {
         $tradesQueue->creatTableTradesQueue();
+        $tableShares->createTableShares();
     }
 }

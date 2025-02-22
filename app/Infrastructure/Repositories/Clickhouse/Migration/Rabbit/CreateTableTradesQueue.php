@@ -27,7 +27,7 @@ class CreateTableTradesQueue
                     price Float,
                     quantity Int,
                     time TIMESTAMP
-                ) ENGINE = MergeTree() ORDER BY time;
+                ) ENGINE = MergeTree() ORDER BY (uid, time);
             '
             );
 
@@ -58,6 +58,7 @@ class CreateTableTradesQueue
                 SELECT uid, direction, price, quantity, time FROM trades_queue
             '
             );
+            echo "Table trades created";
         } catch (\ClickHouseDB\Exception\DatabaseException $e) {
             error_log($e->getMessage());
         }

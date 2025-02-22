@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Instrument\Share\ShareRepositoryInterface;
+use App\Domain\Instrument\InstrumentRepositoryInterface;
 use App\Infrastructure\Repositories\TInvestApi\Instrument\Shares\TInvestSharesRepository;
 
 class TestController
 {
     public function __construct(
-        private readonly ShareRepositoryInterface $rep,
-        private readonly TInvestSharesRepository  $test
+        private readonly InstrumentRepositoryInterface $rep,
+        private readonly TInvestSharesRepository       $test
     )
     {
     }

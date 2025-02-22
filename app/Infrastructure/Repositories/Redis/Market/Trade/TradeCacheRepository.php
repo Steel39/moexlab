@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Repositories\Redis\Market\Trade;
 
 use App\Application\Trade\DTOs\Market\TradeDTO;
+use App\Application\Trade\DTOs\TradePeriodTimeDTO;
 use App\Domain\Market\Trade\TradeRepositoryInterface;
 use App\Domain\Market\Trade\ValueObject\TradeTimeValue;
 use Illuminate\Support\Facades\Redis;
@@ -27,7 +28,7 @@ class TradeCacheRepository implements TradeRepositoryInterface
         print_r( $this->redis::hgetall("time:{$tradeDTO->time->getMicroTime()}"));
     }
 
-    public function getByTime(TradeTimeValue $timeTrade)
+    public function getByTime(TradePeriodTimeDTO $periodTime)
     {
         // TODO: Implement getByTime() method.
     }
