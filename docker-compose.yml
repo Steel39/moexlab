@@ -52,7 +52,7 @@ services:
       test: [ "CMD", "mysqladmin", "ping" ]
     container_name: "${DB_CONTAINER_NAME}"
 
-  node:
+  frontend:
     build:
       context: .
       dockerfile: ./docker/frontend/Dockerfile

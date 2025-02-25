@@ -1,53 +1,54 @@
 <template>
-    <Welcome >
-        <header class="bg-blue-600 text-white py-20 rounded-lg">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <h1 class="text-4xl text-gray-200 font-bold">Добро пожаловать в аналитический терминал</h1>
-                <p class="mt-4 text-lg">Получайте актуальные данные и принимайте обоснованные решения</p>
+    <div class="min-h-screen bg-black text-white">
+        <header class="text-center p-2">
+            <div class="flex flex-row justify-between">
+                <Logo />
             </div>
         </header>
 
-        <!-- Основной контент -->
-        <main class="py-10">
-            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Карточка 1 -->
-                <button @click="getShares">
-                    <div class="bg-white shadow rounded-lg p-6 hover:bg-gray-100 hover:shadow-md duration-200">
-                        <h2 class="text-xl font-semibold">Акции</h2>
-                        <p class="mt-2 text-gray-600">Здесь вы можете увидеть данные по сделкам на Московской бирже.</p>
-                    </div>
-                </button>
-
-                <button>
-                <div class="bg-white shadow rounded-lg p-6">
-                    <h2 class="text-xl font-semibold">Фьючерсы</h2>
-                    <p class="mt-2 text-gray-600">Срочные бумаги имеют интерес у более квалифицированных трейдеров.</p>
-                </div>
-                </button>
-                <div class="bg-white shadow rounded-lg p-6">
-                    <h2 class="text-xl font-semibold">Опционы</h2>
-                    <p class="mt-2 text-gray-600">Стройте анализ решений на основе данных по опционам</p>
+        <section id="features" class="py-10">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <ServiceCard
+                        title="Интерактивные графики"
+                        description="Визуализированные данные о торгах на фондовом и срочном рынке."
+                        link="/terminal"
+                    />
+                    <ServiceCard
+                        title="Аналитический терминал"
+                        description="Следите за торгами в режиме реального времени"
+                        link="/terminal"
+                    />
                 </div>
             </div>
-        </main>
+        </section>
 
-    </Welcome>
+        <section id="examples" class="py-10 bg-gray-900">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6">Наши сервисы</h2>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Терминал для отслеживания торгов в реальном времени по срочным и фондовым активам</li>
+                    <li>Подробное изучение палитры сделок по конкретным инструментам</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="bg-gray-800 text-center py-5">
+            <p class="mt-2">Если у вас есть вопросы или вы хотите узнать больше, свяжитесь с нами по электронной почте:
+                <a href="mailto:info@analytics.com" class="text-yellow-300 underline">info@analytics.com</a>
+            </p>
+            <p class="mt-2">&copy; 2024 MoexLAB.</p>
+        </footer>
+    </div>
 </template>
 
 <script setup>
-
-import Welcome from "@/Pages/Welcome.vue";
-import { useForm } from "@inertiajs/vue3";
-const form = useForm({});
-
-const getShares = () => {
-    form.get( route('guest_trades'), {
-        preserveScroll: true,
-    });
-}
-
+import Logo from '@/Components/Header/Logo.vue';
+import ServiceCard from '@/Components/MainPage/ServiceCard.vue';
 </script>
 
 <style scoped>
-
+/* Дополнительные стили можно добавить здесь */
 </style>
+
+Найти еще

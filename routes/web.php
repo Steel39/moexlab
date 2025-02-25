@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', \App\Http\Controllers\UI\User\WelcomeController::class)->name('welcome');
-Route::get('/guest_trades', \App\Http\Controllers\UI\User\MOEX\Terminal\TradeTerminalController::class)->name('guest_trades');
+Route::get('/terminal', \App\Http\Controllers\UI\User\MOEX\Terminal\TradeTerminalController::class)->name('terminal');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

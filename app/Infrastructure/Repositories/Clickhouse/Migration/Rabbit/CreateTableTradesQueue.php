@@ -27,7 +27,7 @@ class CreateTableTradesQueue
                     price Float,
                     quantity Int,
                     time TIMESTAMP
-                ) ENGINE = MergeTree() ORDER BY (uid, time);
+                ) ENGINE = MergeTree() PARTICION BY (uid) ORDER BY (time);
             '
             );
 

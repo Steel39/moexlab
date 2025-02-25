@@ -10,17 +10,11 @@ use Inertia\Response;
 class TradeTerminalController
 {
 
-    public function __construct(
-        private readonly GetInstrumentsQueryHandler $handler
-    )
-    {
 
-    }
 
     public function __invoke(): Response
     {
-        $query = new Get();
-        $instrumentData = ($this->handler)($query);
-        return Inertia::render('Guest/Pages/MOEX/TradeTerminal', $instrumentData);
+
+        return Inertia::render('Guest/Pages/MOEX/TradeTerminal/TradeTerminal');
     }
 }
