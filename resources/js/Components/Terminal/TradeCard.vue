@@ -1,5 +1,6 @@
 <template>
-    <div :style="{ boxShadow: shadowStyle }" class="bg-gray-800 rounded-lg p-4 transition-shadow">
+    <div :style="{ boxShadow: shadowStyle }" class="bg-gray-800 rounded-lg p-4
+    hover:scale-105 transition-transform duration-300">
         <h2 class="text-xl font-semibold text-orange-400">{{ ticker }}</h2>
         <div class="flex justify-between mt-2">
             <div>
