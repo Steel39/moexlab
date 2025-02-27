@@ -10,6 +10,7 @@ use App\Domain\Market\Trade\ValueObject\TradeTimeValue;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
+use PHPUnit\Util\Json;
 
 class SharesController extends Controller
 {
@@ -17,6 +18,18 @@ class SharesController extends Controller
 
     public function __construct(private readonly GetTradesByTimeHandler $handler)
     {
+    }
+
+    public function getData()
+    {
+        $data = [
+            'ticker' => 'AAPL',
+            'purchaseVolume' => 12000,
+            'saleVolume' => 9000,
+            'priceChange' => '+2.5%',
+            'relativeVolume' => 0.05
+        ];
+        return $data;
     }
 
     public function getTradesByTime(int $beginTime = null, int $endTime = null): Response

@@ -9,9 +9,6 @@ use Inertia\Response;
 
 class TradeTerminalController
 {
-
-
-
     public function __invoke(): Response
     {
 
