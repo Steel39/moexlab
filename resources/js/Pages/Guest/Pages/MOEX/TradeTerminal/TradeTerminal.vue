@@ -16,26 +16,26 @@
 import TerminalHeader from '@/Components/Header/TerminalHeader.vue';
 import TradeCard from '@/Components/Terminal/TradeCard.vue';
 import { ref, onMounted } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-const { props } = usePage();
-const stockData = ref(props.stockData || []);
+import { router, usePage } from '@inertiajs/vue3';
 
 
-onMounted(async () => {
-    try {
-        const response = await axios.get('/api/getTradesOnSharesPerDay'); // Замените на ваш URL API
-        stockData.value = response.data; // Обновляем stockData
-    } catch (error) {
-        console.error('Ошибка при загрузке данных:', error);
+const props = defineProps({
+    stockData: {
+        type: Array,
+        required: true,
     }
 })
+
+const getSharesTrades = () => {
+    router.reload({
+        only: stockData
+    })
+}
+
+console.log(props.stockData)
 </script>
 
 <style scoped>
 /* Добавьте свои стили здесь */
 </style>
 
-
-<style scoped>
-/* Дополнительные стили, если необходимо */
-</style>

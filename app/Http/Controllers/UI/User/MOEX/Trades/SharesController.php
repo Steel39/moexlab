@@ -20,16 +20,34 @@ class SharesController extends Controller
     {
     }
 
-    public function getData()
+    public function __invoke()
     {
-        $data = [
-            'ticker' => 'AAPL',
-            'purchaseVolume' => 12000,
-            'saleVolume' => 9000,
-            'priceChange' => '+2.5%',
-            'relativeVolume' => 0.05
+        $stockData = [
+            'stockData' => [
+                'ticker' => 'AAPL',
+                'purchaseVolume' => 26000,
+                'saleVolume' => 22000,
+                'priceChange' => '+2.5%',
+                'relativeVolume' => 0.24
+            ],
+            [
+                'ticker' => 'FB',
+                'purchaseVolume' => 11000,
+                'saleVolume' => 9000,
+                'priceChange' => '+2.5%',
+                'relativeVolume' => 0.56
+            ],
+            [
+                'ticker' => 'GAZP',
+                'purchaseVolume' => 32000,
+                'saleVolume' => 16000,
+                'priceChange' => '+2.5%',
+                'relativeVolume' => 0.65
+            ],
+
+
         ];
-        return $data;
+        return Inertia::render('Guest/Pages/MOEX/TradeTerminal/TradeTerminal', ['stockData' => $stockData]);
     }
 
     public function getTradesByTime(int $beginTime = null, int $endTime = null): Response

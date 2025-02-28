@@ -28,4 +28,6 @@ const headerButton = ref([
         route: 'getTradeOnFuturesPerDay'
     }
 ])
+
+
 </script>

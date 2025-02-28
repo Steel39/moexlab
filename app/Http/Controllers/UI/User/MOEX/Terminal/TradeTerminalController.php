@@ -13,5 +13,6 @@ class TradeTerminalController
     {
 
         return Inertia::render('Guest/Pages/MOEX/TradeTerminal/TradeTerminal');
+
     }
 }
