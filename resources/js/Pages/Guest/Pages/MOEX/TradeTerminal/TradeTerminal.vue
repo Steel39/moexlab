@@ -1,12 +1,15 @@
 <template>
-    <div class="min-h-screen bg-gray-900 text-white flex flex-col">
+    <div class="min-h-screen bg-gray-950 text-white flex flex-col">
         <TerminalHeader />
 
         <main class="flex-grow p-2">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <TradeCard v-for="(data, index) in stockData" :key="index" :ticker="data.ticker"
-                    :purchaseVolume="data.purchaseVolume" :saleVolume="data.saleVolume" :priceChange="data.priceChange"
-                    :relativeVolume="data.relativeVolume" />
+                <TradeCard v-for="data in stockData"
+                           :ticker="data.uid"
+                           :purchaseVolume="data.total_buy"
+                           :saleVolume="data.total_sell"
+                           :priceChange="data.end_price"
+                           :relativeVolume="data.start_price" />
             </div>
         </main>
     </div>
@@ -32,7 +35,6 @@ const getSharesTrades = () => {
     })
 }
 
-console.log(props.stockData)
 </script>
 
 <style scoped>

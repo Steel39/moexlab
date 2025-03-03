@@ -1,6 +1,6 @@
 <clickhouse>
     <rabbitmq>
-            <username>steel</username>
+            <username>steelRabbit</username>
         <password>pass</password>
     </rabbitmq>
 </clickhouse>

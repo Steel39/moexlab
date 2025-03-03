@@ -2,12 +2,8 @@
 
 namespace App\Console\Commands\Test;
 
-use App\Application\Trade\DTOs\TradePeriodTimeDTO;
-use App\Domain\Market\Trade\ValueObject\TradeTimeValue;
 use App\Infrastructure\Repositories\Clickhouse\Instrument\ClickhouseInstrumentRepository;
-use App\Infrastructure\Repositories\Clickhouse\Market\ClickHouseTradeRepository;
 use App\Infrastructure\Repositories\TInvestApi\Instrument\Shares\TInvestSharesRepository;
-use Google\Protobuf\Timestamp;
 use Illuminate\Console\Command;
 use Tinderbox\ClickhouseBuilder\Exceptions\Exception;
 

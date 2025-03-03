@@ -33,11 +33,11 @@ const props = defineProps({
         required: true,
     },
     priceChange: {
-        type: String,
+        type: Float32Array,
         required: true,
     },
     relativeVolume: {
-        type: Number,
+        type: Float32Array,
         required: true,
     },
 });

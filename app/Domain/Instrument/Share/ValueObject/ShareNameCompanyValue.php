@@ -2,7 +2,10 @@
 
 namespace App\Domain\Instrument\Share\ValueObject;
 
-class ShareNameCompanyValue
+final readonly class ShareNameCompanyValue
 {
+    public function __construct(public string $companyName)
+    {
+    }
 
 }

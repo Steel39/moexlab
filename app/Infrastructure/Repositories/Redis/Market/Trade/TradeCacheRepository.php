@@ -2,10 +2,9 @@
 
 namespace App\Infrastructure\Repositories\Redis\Market\Trade;
 
-use App\Application\Trade\DTOs\Market\TradeDTO;
-use App\Application\Trade\DTOs\TradePeriodTimeDTO;
+use App\Application\Market\Trade\DTOs\Market\TradeDTO;
+use App\Application\Market\Trade\DTOs\TradePeriodTimeDTO;
 use App\Domain\Market\Trade\TradeRepositoryInterface;
-use App\Domain\Market\Trade\ValueObject\TradeTimeValue;
 use Illuminate\Support\Facades\Redis;
 
 class TradeCacheRepository implements TradeRepositoryInterface

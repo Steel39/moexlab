@@ -2,14 +2,13 @@
 
 namespace App\Infrastructure\Repositories\Mysql\Market;
 
-use App\Application\Trade\DTOs\Market\TradeDTO;
 use App\Domain\Market\Trade\TradeRepositoryInterface;
 use App\Domain\Market\Trade\ValueObject\TradeTimeValue;
 
 class TradeRepository implements TradeRepositoryInterface
 {
 
-    public function save(TradeDTO $tradeDTO)
+    public function save(\App\Application\Market\Trade\DTOs\Market\TradeDTO $tradeDTO)
     {
 
     }

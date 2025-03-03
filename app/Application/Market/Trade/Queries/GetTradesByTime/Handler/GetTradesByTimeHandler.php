@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Trade\Queries\GetTradesByTime\Handler;
+namespace App\Application\Market\Trade\Queries\GetTradesByTime\Handler;
 
-use App\Application\Trade\Queries\GetTradesByTime\GetTradesByTimeQuery;
+use App\Application\Market\Trade\Queries\GetTradesByTime\GetTradesByTimeQuery;
 use App\Domain\Market\Trade\TradeRepositoryInterface;
 
 readonly class GetTradesByTimeHandler
@@ -13,6 +13,6 @@ readonly class GetTradesByTimeHandler
 
     public function handle(GetTradesByTimeQuery $query)
     {
-        return $this->tradeRepository->getByTime($query->getPeriodTime());
+        return $this->tradeRepository->getSumTrades($query->getPeriodTime());
     }
 }

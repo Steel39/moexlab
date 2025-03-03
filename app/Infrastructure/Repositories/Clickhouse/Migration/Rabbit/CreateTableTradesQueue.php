@@ -27,7 +27,7 @@ class CreateTableTradesQueue
                     price Float,
                     quantity Int,
                     time TIMESTAMP
-                ) ENGINE = MergeTree() PARTICION BY (uid) ORDER BY (time);
+                ) ENGINE = MergeTree() PARTITION BY (uid) ORDER BY (time);
             '
             );
 
@@ -47,7 +47,7 @@ class CreateTableTradesQueue
                     rabbitmq_routing_key_list = \'trades_queue\',
                     rabbitmq_format = \'JSONEachRow\',
                     rabbitmq_password = \'pass\',
-                    rabbitmq_username = \'steel\'
+                    rabbitmq_username = \'steelRabbit\'
             '
             );
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Trade\Queries\GetTradesByTime;
+namespace App\Application\Market\Trade\Queries\GetTradesByTime;
 
-use App\Application\Trade\DTOs\TradePeriodTimeDTO;
+use App\Application\Market\Trade\DTOs\TradePeriodTimeDTO;
 
 readonly class GetTradesByTimeQuery
 {

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repositories\TInvestApi\Market;
 
-use App\Application\Trade\DTOs\Market\TradeDTO;
+use App\Application\Market\Trade\DTOs\Market\TradeDTO;
 use App\Domain\Market\Trade\ValueObject\TradeDirectionValue;
 use App\Domain\Market\Trade\ValueObject\TradePriceValue;
 use App\Domain\Market\Trade\ValueObject\TradeQuantityValue;

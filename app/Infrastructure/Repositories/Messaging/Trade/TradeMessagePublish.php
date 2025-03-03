@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repositories\Messaging\Trade;
 
-use App\Application\Trade\DTOs\Market\TradeDTO;
+use App\Application\Market\Trade\DTOs\Market\TradeDTO;
 use App\Infrastructure\Adapters\RabbitMQAdapter;
 use PhpAmqpLib\Message\AMQPMessage;
 

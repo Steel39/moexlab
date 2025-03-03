@@ -24,7 +24,7 @@ readonly class ShareSectorValue
     {
     }
 
-    public function getSectorRuName(): string
+    public function getSectorName(): string
     {
         return self::ENERGY_SECTOR[ $this->sector ];
     }

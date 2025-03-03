@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Trade\DTOs\Market;
+namespace App\Application\Market\Trade\DTOs\Market;
 
 use App\Domain\Market\Trade\ValueObject\TradeDirectionValue;
 use App\Domain\Market\Trade\ValueObject\TradePriceValue;
