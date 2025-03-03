@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UI\User\Admin\Shares\GetSharesBoard;
 use App\Http\Controllers\UI\User\MOEX\Trades\SharesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +18,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('terminal/shares', SharesController::class)->name('getTradesOnSharesPerDay');
+Route::get('/terminal/shares', SharesController::class)->name('getTradesOnSharesPerDay');
+
+Route::middleware('auth')->prefix('/admin')->group( function() {
+    Route::prefix('/shares')->group( function() {
+        Route::get('/', GetSharesBoard::class )->name('shares.board');
+    });
+});
 
 require __DIR__.'/auth.php';
+
+
