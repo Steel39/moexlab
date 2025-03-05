@@ -13,9 +13,9 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-stone-500/40">
+        <div class="min-h-screen bg-stone-800/40">
             <nav
-                class="border-b  gradient-text bg-stone-200/50"
+                class="border-b  gradient-text bg-slate-300/50"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto  px-4 sm:px-6 lg:px-8">
