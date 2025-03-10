@@ -3,7 +3,7 @@
 namespace App\Infrastructure\Repositories\Mysql\Instrument;
 
 use App\Domain\Instrument\InstrumentRepositoryInterface;
-use App\Domain\Instrument\Share\Share;
+use App\Domain\Repositories\Share\Share;
 use Illuminate\Support\Facades\DB;
 
 class LocalSharesRepository implements InstrumentRepositoryInterface
@@ -19,7 +19,7 @@ class LocalSharesRepository implements InstrumentRepositoryInterface
         'div_yield_flag'
     ];
 
-    public function save(\App\Domain\Instrument\Share\Share $share): bool
+    public function save(\App\Domain\Repositories\Share\Share $share): bool
     {
         try {
             return DB::table('shares')->insert($share->toArray());
@@ -79,7 +79,7 @@ class LocalSharesRepository implements InstrumentRepositoryInterface
 
     }
 
-    public function delete(\App\Domain\Instrument\Share\Share $share): void
+    public function delete(\App\Domain\Repositories\Share\Share $share): void
     {
         try {
             DB::table('share')->where('uid', '=', $share->uid);

@@ -3,7 +3,7 @@
 namespace App\Application\Instrument\Share\Command\Handler;
 
 use App\Application\Instrument\Share\Command\SaveShareCommand;
-use App\Domain\Instrument\Share\Repository\WriteShareRepositoryInterface;
+use App\Domain\Repositories\Share\Repository\WriteShareRepositoryInterface;
 
 readonly class SaveSharesCommandHandler
 {

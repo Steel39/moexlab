@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Instrument\Share\Repository;
+namespace App\Domain\Repositories\Share\Repository;
 
 interface WriteShareRepositoryInterface
 {

@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Domain\Instrument\Share;
-
-use Tinkoff\Invest\V1\SecurityTradingStatus;
+namespace App\Domain\Repositories\Share;
 
 readonly class Share
 {

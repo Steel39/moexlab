@@ -3,7 +3,7 @@
 namespace App\Application\Instrument\Share\Query\Handler;
 
 use App\Application\Instrument\Share\Query\GetSharesQuery;
-use App\Domain\Instrument\Share\Repository\ReadShareRepositoryInterface;
+use App\Domain\Repositories\Share\Repository\ReadShareRepositoryInterface;
 
 class GetSharesQueryHandler
 {

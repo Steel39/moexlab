@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Instrument\Share\Repository;
+namespace App\Domain\Repositories\Share\Repository;
 
-use App\Domain\Instrument\Share\Share;
+use App\Domain\Repositories\Share\Share;
 
 interface ReadShareRepositoryInterface
 {

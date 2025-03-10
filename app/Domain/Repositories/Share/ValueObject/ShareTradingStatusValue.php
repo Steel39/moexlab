@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Domain\Instrument\Share\ValueObject;
+namespace App\Domain\Repositories\Share\ValueObject;
 
+use App\Domain\Instrument\Share\ValueObject\ShareValueInterface;
 use Tinkoff\Invest\V1\SecurityTradingStatus;
 
 readonly class ShareTradingStatusValue implements ShareValueInterface

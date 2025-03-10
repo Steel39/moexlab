@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repositories\TInvestApi\Instrument\Shares;
 
-use App\Domain\Instrument\Share\Share;
+use App\Domain\Repositories\Share\Share;
 use App\Infrastructure\Adapters\TClientAdapter;
 use Tinkoff\Invest\V1\InstrumentsRequest;
 use Tinkoff\Invest\V1\InstrumentStatus;

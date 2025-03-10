@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repositories\Mysql\Instrument\Share;
 
-use App\Domain\Instrument\Share\Repository\WriteShareRepositoryInterface;
+use App\Domain\Repositories\Share\Repository\WriteShareRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 class WriteShareRepository implements WriteShareRepositoryInterface
@@ -19,7 +19,7 @@ class WriteShareRepository implements WriteShareRepositoryInterface
         'div_yield_flag'
     ];
 
-    public function save(\App\Domain\Instrument\Share\Share $share): bool
+    public function save(\App\Domain\Repositories\Share\Share $share): bool
     {
         try {
             return DB::table('shares')->insert($share->toArray());
@@ -42,7 +42,7 @@ class WriteShareRepository implements WriteShareRepositoryInterface
             throw new \PDOException($e->getMessage());
         }
     }
-    public function delete(\App\Domain\Instrument\Share\Share $share): void
+    public function delete(\App\Domain\Repositories\Share\Share $share): void
     {
         try {
             DB::table('share')->where('uid', '=', $share->uid);

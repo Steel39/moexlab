@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Instrument\Share\ValueObject;
+namespace App\Domain\Repositories\Share\ValueObject;
 
 readonly class ShareSectorValue
 {
