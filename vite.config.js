@@ -24,11 +24,4 @@ export default defineConfig({
             host: 'localhost'
         }
     },
-    proxy: {
-        '/': {
-            target: 'http://localhost:5174', // Укажите адрес вашего сервера
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, ''), // Измените путь, если необходимо
-        },
-    },
 });

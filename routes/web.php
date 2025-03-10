@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UI\User\Admin\Shares\GetSharesBoard;
 use App\Http\Controllers\UI\User\MOEX\Trades\SharesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+Route::get('/test', TestController::class);
 Route::get('/', \App\Http\Controllers\UI\User\WelcomeController::class)->name('welcome');
 Route::get('/terminal', \App\Http\Controllers\UI\User\MOEX\Terminal\TradeTerminalController::class)->name('terminal');
 

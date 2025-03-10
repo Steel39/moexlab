@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-center">
-      <h1 class="text-4xl  font-bold relative overflow-hidden">
+      <h1 class="text-4xl font-sans font-bold relative overflow-hidden">
           <button @click="getMainPage" class="p-1  text-shadow">
               <span class="gradient-text">MoexLab</span>
           </button>

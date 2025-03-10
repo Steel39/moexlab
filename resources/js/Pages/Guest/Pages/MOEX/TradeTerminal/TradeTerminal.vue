@@ -1,7 +1,6 @@
 <template>
     <div class="min-h-screen bg-gray-950 text-white flex flex-col">
         <TerminalHeader />
-
         <main class="flex-grow p-2">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <TradeCard v-for="data in stockData"
@@ -25,9 +24,10 @@ import { router, usePage } from '@inertiajs/vue3';
 const props = defineProps({
     stockData: {
         type: Array,
-        required: true,
+        required: false,
     }
 })
+
 
 const getSharesTrades = () => {
     router.reload({

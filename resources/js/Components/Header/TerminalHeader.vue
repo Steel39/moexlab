@@ -1,8 +1,8 @@
 <template>
     <h1 class="text-3xl  font-bold"></h1>
-    <header class="flex p-2 gap-4 justify-between bg-transparent">
+    <header class="flex p-2 gap-4 bg-transparent">
         <Logo/>
-        <div class="flex gap-2 justify-end">
+        <div class="flex gap-2 mx-10">
             <TerminalHeaderButton
                 v-for="button in headerButton"
                 :name="button.name"
@@ -24,12 +24,12 @@ import Logo from "@/Components/Header/Logo.vue";
 const headerButton = ref([
     {
         name: 'Акции',
-        color: 'blue',
+        color: 'red',
         route: 'getTradesOnSharesPerDay'
     },
     {
         name: 'Фьючерсы',
-        color: 'emerald',
+        color: 'orange',
         route: 'getTradeOnFuturesPerDay'
     }
 ])
