@@ -48,6 +48,9 @@ const updateVolume = (stockId) => {
                     <button @click="handleDelete" class="rounded hover:text-black hover:scale-105 duration-300">
                         Удалить акции
                     </button>
+                    <button @click="" class="rounded hover:text-black hover:scale-105 duration-300">
+                        Обновить объемы
+                    </button>
                 </div>
 
                 <!-- Список акций -->
@@ -58,7 +61,7 @@ const updateVolume = (stockId) => {
                         <div class="space-y-2">
                             <p>Тикер: <span class="font-semibold">{{ share.ticker}}</span></p>
                             <p>Сектор: <span class="font-semibold">{{ share.sector }}</span></p>
-                            <p>Лотность: <span class="font-semibold">10</span></p>
+                            <p>Лотность: <span class="font-semibold">{{ share.lot}}</span></p>
                             <p>Short:
                                 <span v-if="share.short_enabled_flag" class="font-semibold text-green-400">Да</span>
                                 <span v-else class="font-semibold text-red-400">Нет</span>
