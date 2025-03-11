@@ -4,13 +4,14 @@ namespace App\Http\Controllers\UI\Admin\Shares;
 
 use App\Application\Instrument\Share\Query\GetSharesQuery;
 use App\Application\Instrument\Share\Query\Handler\GetSharesQueryHandler;
+use App\Application\Instrument\Share\DTOs\SharesDTO;
 use Inertia\Inertia;
 use Inertia\Response;
 
 final readonly class GetSharesBoard
 {
     public function __construct(
-        private GetSharesQueryHandler $handler
+        private GetSharesQueryHandler $handler,
     )
     {
     }
@@ -19,7 +20,7 @@ final readonly class GetSharesBoard
     {
         $query = new GetSharesQuery();
         $shares = ($this->handler)($query);
-        dd($shares);
-        return Inertia::render('Admin/InstrumentPanel/Shares');
+        $sharesArray = array_map(fn(SharesDTO $dto) => $dto->toArray(), $shares);
+        return Inertia::render('Admin/InstrumentPanel/Shares', ['shares' => $sharesArray]);
     }
 }

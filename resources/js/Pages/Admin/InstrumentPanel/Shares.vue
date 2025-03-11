@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 
 const props = defineProps({
-    stocks: {
+    shares: {
         type: Array,
         default: () => []
     }
@@ -51,21 +51,20 @@ const updateVolume = (stockId) => {
                 </div>
 
                 <!-- Список акций -->
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="overflow-hidden rounded-lg bg-gray-800/50 p-6 shadow-xl shadow-stone-200/50">
-                        <h3 class="mb-4 text-xl text-center font-bold text-white">Apple</h3>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+                    <div v-for="share in shares" class="overflow-hidden rounded-lg bg-gray-400/70 p-6 shadow-xl
+                    hover:bg-gray-400/40 shadow-stone-200/50 hover:scale-105 duration-200 transition-all">
+                        <h3 class="mb-4 text-xl text-center font-bold text-gray-900/90 ">{{ share.company_name }}</h3>
                         <div class="space-y-2">
-                            <p class="text-gray-300">Тикер: <span class="font-semibold">AAPL</span></p>
-                            <p class="text-gray-300">Сектор: <span class="font-semibold">Технологии</span></p>
-                            <p class="text-gray-300">Лотность: <span class="font-semibold">10</span></p>
-                            <p class="text-gray-300">Short:
-                                <span class="font-semibold text-green-400">On</span>
+                            <p>Тикер: <span class="font-semibold">{{ share.ticker}}</span></p>
+                            <p>Сектор: <span class="font-semibold">{{ share.sector }}</span></p>
+                            <p>Лотность: <span class="font-semibold">10</span></p>
+                            <p>Short:
+                                <span v-if="share.short_enabled_flag" class="font-semibold text-green-400">Да</span>
+                                <span v-else class="font-semibold text-red-400">Нет</span>
                             </p>
-                            <p class="text-gray-300">Выпущено бумаг:
-                                <span class="font-semibold">8985416548465</span>
-                            </p>
-                            <p class="text-gray-300">Объем торгов (неделя):
-                                <span class="font-semibold">159956</span>
+                            <p>Выпущено бумаг:
+                                <span class="font-semibold">{{ share.issue_size}}</span>
                             </p>
                         </div>
                         <div class="mt-6 flex gap-4 text-gray-800/50 shadow-lg">
