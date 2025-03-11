@@ -22,7 +22,7 @@ class GetStreamTradesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Get stream trades of Shares from t-invest-api';
+    protected $description = 'Get stream trades of Share from t-invest-api';
 
     /**
      * Execute the console command.

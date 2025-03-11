@@ -16,6 +16,6 @@ class TestController
 
     public function __invoke()
     {
-        return Inertia::render('Guest/Pages/MOEX/TradeGraphics/Index');
+        return Inertia::render('Guest/MOEX/TradeGraphics/Index');
     }
 }

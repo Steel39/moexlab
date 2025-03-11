@@ -8,6 +8,6 @@ class WelcomeController
 {
     public function __invoke()
     {
-        return Inertia::render('Guest/Pages/Index', []);
+        return Inertia::render('Guest/Index', []);
     }
 }

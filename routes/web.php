@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\UI\User\Admin\Shares\GetSharesBoard;
+use App\Http\Controllers\UI\Admin\Shares\GetSharesBoard;
 use App\Http\Controllers\UI\User\MOEX\Trades\SharesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

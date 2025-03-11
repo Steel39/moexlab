@@ -140,9 +140,9 @@
   </script>
 
   <style>
-  @import 'tailwindcss/base';
-  @import 'tailwindcss/components';
-  @import 'tailwindcss/utilities';
+  @import '../../../../../../node_modules/tailwindcss/base.css';
+  @import '../../../../../../node_modules/tailwindcss/components.css';
+  @import '../../../../../../node_modules/tailwindcss/utilities.css';
 
   .chart-container {
     position: relative;

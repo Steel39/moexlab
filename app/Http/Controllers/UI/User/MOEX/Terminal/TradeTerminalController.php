@@ -10,7 +10,7 @@ class TradeTerminalController
     public function __invoke(): Response
     {
 
-        return Inertia::render('Guest/Pages/MOEX/TradeTerminal/TradeTerminal');
+        return Inertia::render('Guest/MOEX/TradeTerminal/TradeTerminal');
 
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-screen bg-gray-950 text-white flex flex-col">
         <TerminalHeader />
-        <main class="flex-grow p-2">
+        <main class="flex-grow p-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <TradeCard v-for="data in stockData"
                            :ticker="data.uid"

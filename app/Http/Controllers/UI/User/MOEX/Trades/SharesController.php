@@ -24,7 +24,7 @@ class SharesController extends Controller
     public function __invoke()
     {
         $stockData = self::getLastHourTrades();
-        return Inertia::render('Guest/Pages/MOEX/TradeTerminal/TradeTerminal', ['stockData' => $stockData]);
+        return Inertia::render('Guest/MOEX/TradeTerminal/TradeTerminal', ['stockData' => $stockData]);
     }
 
     private function getTradesByTime(int $beginTime = null, int $endTime = null): Response
@@ -36,7 +36,7 @@ class SharesController extends Controller
         $data = $this->handler->handle($query);
         dd($data);
         */
-        return Inertia::render('Guest/Pages/MOEX/Shares');
+        return Inertia::render('Guest/Pages/MOEX/Share');
     }
 
     private function getLastHourTrades(): array
