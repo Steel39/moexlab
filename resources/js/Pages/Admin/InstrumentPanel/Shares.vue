@@ -10,7 +10,7 @@ const props = defineProps({
 });
 
 const handleUpload = () => {
-    router.get(route('stocks.upload'), {
+    router.get(route('shares.load'), {
         preserveScroll: true,
         onSuccess: () => alert('Акции успешно загружены')
     });
@@ -18,7 +18,7 @@ const handleUpload = () => {
 
 const handleDelete = () => {
     if (confirm('Вы уверены, что хотите удалить все акции?')) {
-        router.delete(route('stocks.delete-all'), {
+        router.get(route('shares.delete'), {
             preserveScroll: true,
             onSuccess: () => alert('Акции успешно удалены')
         });
@@ -54,7 +54,7 @@ const updateVolume = (stockId) => {
                 </div>
 
                 <!-- Список акций -->
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6">
                     <div v-for="share in shares" class="overflow-hidden rounded-lg bg-gray-400/70 p-6 shadow-xl
                     hover:bg-gray-400/40 shadow-stone-200/50 hover:scale-105 duration-200 transition-all">
                         <h3 class="mb-4 text-xl text-center font-bold text-gray-900/90 ">{{ share.company_name }}</h3>

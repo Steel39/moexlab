@@ -79,7 +79,7 @@ class WriteShareRepository implements WriteShareRepositoryInterface
     public function deleteAll(): void
     {
         try {
-            DB::table('shares')->truncate();
+            DB::table('shares')->delete();
         } catch (PDOException $e) {
             throw new PDOException("Failed to truncate shares table", 0, $e);
         }

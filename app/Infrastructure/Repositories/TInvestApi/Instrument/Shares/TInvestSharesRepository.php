@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Repositories\TInvestApi\Instrument\Shares;
 
 use App\Domain\Entity\Instrument\Share;
+use App\Domain\Repositories\Instrument\Share\ApiShareRepositoryInterface;
 use App\Domain\ValueObjects\InstrumentUid;
 use App\Domain\ValueObjects\Sector;
 use App\Infrastructure\Adapters\TClientAdapter;
@@ -11,7 +12,7 @@ use Tinkoff\Invest\V1\InstrumentsRequest;
 use Tinkoff\Invest\V1\InstrumentStatus;
 use InvalidArgumentException;
 
-class TInvestSharesRepository
+class TInvestSharesRepository implements ApiShareRepositoryInterface
 {
     const COUNTRY_OF_RISK = 'RU';
     const TRADING_STATUS = 5;

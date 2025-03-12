@@ -11,7 +11,8 @@ readonly class SaveSharesCommandHandler
 {
     public function __construct(
         private WriteShareRepositoryInterface $instrumentRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -21,7 +22,7 @@ readonly class SaveSharesCommandHandler
      * @return int Количество сохраненных акций.
      * @throws InvalidArgumentException Если данные в команде некорректны.
      */
-    public function __invoke(SaveSharesCommand $command): int
+    public function __invoke(SaveSharesCommand $command): void
     {
         $shares = $command->getShares();
 
@@ -31,10 +32,10 @@ readonly class SaveSharesCommandHandler
 
         foreach ($shares as $share) {
             if (!$share instanceof Share) {
+                dd($share);
                 throw new InvalidArgumentException("All elements in the shares array must be instances of Share.");
             }
         }
-
-        return $this->instrumentRepository->saveAll($shares);
+        $this->instrumentRepository->saveAll($shares);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands\Test;
 
+use App\Application\Instrument\Share\Command\DeleteShares\DeleteSharesCommand;
+use App\Application\Instrument\Share\Command\DeleteShares\Handler\DeleteSharesCommandHandler;
+use App\Domain\Repositories\Instrument\Share\ApiShareRepositoryInterface;
 use App\Domain\Repositories\Instrument\Share\ReadShareRepositoryInterface;
 use App\Domain\Repositories\Instrument\Share\WriteShareRepositoryInterface;
 use App\Infrastructure\Repositories\TInvestApi\Instrument\Shares\TInvestSharesRepository;
@@ -28,8 +31,8 @@ class TestCommand extends Command
      * Execute the console command.
      * @throws Exception
      */
-    public function handle(TInvestSharesRepository $readShareRepository, ReadShareRepositoryInterface $repository): void
+    public function handle(WriteShareRepositoryInterface $handler): void
     {
-        $repository->getAll();
+        $handler->deleteAll();
     }
 }
