@@ -22,7 +22,7 @@ final readonly class SaveSharesFromApi
         $apiShares = ($this->apiHandler)(new GetSharesApiQuery());
         $command = new SaveSharesCommand($apiShares);
         ($this->commandHandler)($command);
-        return redirect()->back();
+        return redirect()->back()->with(['sucess' => 'Акции удалены']);
     }
 }
 

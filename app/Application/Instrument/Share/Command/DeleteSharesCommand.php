@@ -2,7 +2,7 @@
 
 namespace App\Application\Instrument\Share\Command;
 
-class DeleteSharesCommand
+final readonly class DeleteSharesCommand
 {
 
 }

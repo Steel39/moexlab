@@ -8,6 +8,7 @@ use App\Domain\Repositories\Instrument\Share\ApiShareRepositoryInterface;
 use App\Domain\Repositories\Instrument\Share\ReadShareRepositoryInterface;
 use App\Domain\Repositories\Instrument\Share\WriteShareRepositoryInterface;
 use App\Infrastructure\Repositories\TInvestApi\Instrument\Shares\TInvestSharesRepository;
+use App\Infrastructure\Repositories\TInvestApi\Market\GetCandleByInterval;
 use Illuminate\Console\Command;
 use Tinderbox\ClickhouseBuilder\Exceptions\Exception;
 
@@ -31,8 +32,8 @@ class TestCommand extends Command
      * Execute the console command.
      * @throws Exception
      */
-    public function handle(WriteShareRepositoryInterface $handler): void
+    public function handle(GetCandleByInterval $handler): void
     {
-        $handler->deleteAll();
+        $handler('a78b8349-a1dc-447d-9277-1d75826d089a');
     }
 }
