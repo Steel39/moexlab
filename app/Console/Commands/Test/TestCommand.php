@@ -34,6 +34,6 @@ class TestCommand extends Command
      */
     public function handle(GetCandleByInterval $handler): void
     {
-        $handler('a78b8349-a1dc-447d-9277-1d75826d089a');
+        $handler('e6123145-9665-43e0-8413-cd61b8aa9b13');
     }
 }
