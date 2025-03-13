@@ -3,6 +3,7 @@
 namespace App\Domain\Repositories\Instrument\Share;
 
 use App\Domain\Entity\Instrument\Share;
+use App\Domain\ValueObjects\InstrumentUid;
 use InvalidArgumentException;
 
 interface WriteShareRepositoryInterface
@@ -38,4 +39,13 @@ interface WriteShareRepositoryInterface
      * @return void
      */
     public function deleteByUid(string $uid): void;
+
+
+    /**
+     * Массовое обновление недельных объемов.
+     *
+     * @param array $updates Массив данных для обновления.
+     */
+    public function bulkUpdateWeeklyVolumes(array $updates): void;
+
 }

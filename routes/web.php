@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UI\Admin\Shares\Command\DeleteSharesFromLocalRepository;
 use App\Http\Controllers\UI\Admin\Shares\Command\SaveSharesFromApi;
+use App\Http\Controllers\UI\Admin\Shares\Command\UpdateWeeklyVolumesOfShares;
 use App\Http\Controllers\UI\Admin\Shares\GetSharesBoard;
 use App\Http\Controllers\UI\User\MOEX\Trades\SharesController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::middleware('auth')->prefix('/admin')->group( function() {
         Route::get('/', GetSharesBoard::class )->name('shares.board');
         Route::delete('/', DeleteSharesFromLocalRepository::class)->name('shares.delete');
         Route::get('/load', SaveSharesFromApi::class)->name('shares.load');
+        Route::patch('/update_volumes_weekly', UpdateWeeklyVolumesOfShares::class)->name('shares.volumes.update');
     });
 });
 

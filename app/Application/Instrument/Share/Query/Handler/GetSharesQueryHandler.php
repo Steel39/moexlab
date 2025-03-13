@@ -33,7 +33,8 @@ class GetSharesQueryHandler
             $share->isShortSellingAllowed(),
             $share->getIssueSize(),
             $share->getSector(),
-            $share->hasDividendYield()
+            $share->hasDividendYield(),
+            $share->getVolume()
         ), $shares);
     }
 }

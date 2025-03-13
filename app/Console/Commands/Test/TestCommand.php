@@ -4,13 +4,17 @@ namespace App\Console\Commands\Test;
 
 use App\Application\Instrument\Share\Command\DeleteShares\DeleteSharesCommand;
 use App\Application\Instrument\Share\Command\DeleteShares\Handler\DeleteSharesCommandHandler;
+use App\Application\Instrument\Share\Command\Handler\UpdateWeeklyVolumesCommandHandler;
+use App\Application\Instrument\Share\Command\UpdateWeeklyVolumesCommand;
 use App\Domain\Repositories\Instrument\Share\ApiShareRepositoryInterface;
 use App\Domain\Repositories\Instrument\Share\ReadShareRepositoryInterface;
 use App\Domain\Repositories\Instrument\Share\WriteShareRepositoryInterface;
+use App\Domain\ValueObjects\InstrumentUid;
 use App\Infrastructure\Repositories\TInvestApi\Instrument\Shares\TInvestSharesRepository;
 use App\Infrastructure\Repositories\TInvestApi\Market\GetCandleByInterval;
 use Illuminate\Console\Command;
 use Tinderbox\ClickhouseBuilder\Exceptions\Exception;
+use Google\Protobuf\Timestamp;
 
 class TestCommand extends Command
 {
@@ -32,8 +36,14 @@ class TestCommand extends Command
      * Execute the console command.
      * @throws Exception
      */
-    public function handle(GetCandleByInterval $handler): void
+    public function handle(UpdateWeeklyVolumesCommandHandler $handler): void
     {
-        $handler('e6123145-9665-43e0-8413-cd61b8aa9b13');
+        $this->info('Начинаем обновление недельных объемов...');
+
+        // Создаем команду и передаем её обработчику
+        $command = new UpdateWeeklyVolumesCommand();
+        ($handler)($command);
+
+        $this->info('Обновление недельных объемов завершено.');
     }
 }

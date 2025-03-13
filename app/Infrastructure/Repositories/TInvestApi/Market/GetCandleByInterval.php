@@ -2,46 +2,48 @@
 
 namespace App\Infrastructure\Repositories\TInvestApi\Market;
 
-use App\Infrastructure\Adapters\TClientAdapter;
+use App\Domain\Repositories\Market\Candle\GetCandleByIntervalInterface;
+use App\Domain\ValueObjects\InstrumentUid;
+use App\Domain\Entities\Market\Candle;
 use Google\Protobuf\Timestamp;
 use Tinkoff\Invest\V1\CandleInterval;
+use App\Infrastructure\Adapters\TClientAdapter;
 use Tinkoff\Invest\V1\GetCandlesRequest;
 use Illuminate\Support\Facades\Log;
 use const Grpc\STATUS_OK;
+use App\Domain\ValueObjects\Volume;
 
-readonly class GetCandleByInterval
+class GetCandleByInterval implements GetCandleByIntervalInterface
 {
-    const string TIME_PERIOD = '-1 week';
     public function __construct(
-        private TClientAdapter $adapter
+        private readonly TClientAdapter $adapter
     ) {
     }
 
-    public function __invoke($uid): void
+    /**
+     * Получает свечи по интервалу.
+     *
+     * @param InstrumentUid $uid Идентификатор инструмента.
+     * @param Timestamp $start Начало временного диапазона.
+     * @param Timestamp $end Конец временного диапазона.
+     * @return array Массив объектов свечей.
+     * @throws \RuntimeException Если произошла ошибка при выполнении запроса.
+     */
+    public function getCandleByInterval(InstrumentUid $uid, Timestamp $start, Timestamp $end): Volume
     {
-        // Проверяем, что UID не пустой
-        if (empty($uid)) {
-            throw new \InvalidArgumentException("Instrument UID cannot be empty.");
+        if (!$uid instanceof InstrumentUid) {
+            throw new \InvalidArgumentException("Invalid Instrument UID.");
         }
-
-        // Создаем временные метки
-        $from = new Timestamp();
-        $from->setSeconds(strtotime(self::TIME_PERIOD)); // Начало диапазона: неделя назад
-        $from->setNanos(0);
-
-        $to = new Timestamp();
-        $to->setSeconds(time()); // Конец диапазона: текущее время
-        $to->setNanos(0);
 
         // Получаем gRPC-клиент
         $instrumentServiceClient = $this->adapter->getClientFactory()->marketDataServiceClient;
 
         // Создаем запрос
         $candleRequest = new GetCandlesRequest();
-        $candleRequest->setInstrumentId($uid)
-            ->setFrom($from)
-            ->setTo($to)
-            ->setInterval(CandleInterval::CANDLE_INTERVAL_DAY);
+        $candleRequest->setInstrumentId($uid->getValue())
+                      ->setFrom($start)
+                      ->setTo($end)
+                      ->setInterval(CandleInterval::CANDLE_INTERVAL_HOUR);
 
         // Выполняем запрос
         [$candleServiceResponse, $status] = $instrumentServiceClient->GetCandles($candleRequest)->wait();
@@ -64,16 +66,16 @@ readonly class GetCandleByInterval
         // Проверяем, что массив свечей не пустой
         if (empty($candleInfo)) {
             Log::info("No candles found for the given interval.");
-            throw new \RuntimeException("No candles found for the given interval.");
+            return new Volume(0);
         }
 
-        // Считаем сумму объемов
-        $sum = 0;
+        // Преобразуем данные в массив объектов Candle
+        $absoluteVolume = 0;
         foreach ($candleInfo as $item) {
-            $sum += $item->getVolume();
+            $absoluteVolume += $item->getVolume();
         }
 
-        // Выводим результат
-        dd($sum);
+        return new Volume($absoluteVolume);
+
     }
 }

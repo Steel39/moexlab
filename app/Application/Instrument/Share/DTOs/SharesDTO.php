@@ -4,6 +4,7 @@ namespace App\Application\Instrument\Share\DTOs;
 
 use App\Domain\ValueObjects\InstrumentUid;
 use App\Domain\ValueObjects\Sector;
+use App\Domain\ValueObjects\Volume;
 
 final class SharesDTO
 {
@@ -15,7 +16,8 @@ final class SharesDTO
         public readonly bool $shortEnabledFlag,
         public readonly int $issueSize,
         public readonly Sector $sector,
-        public readonly bool $divYieldFlag
+        public readonly bool $divYieldFlag,
+        public readonly Volume $volume
     ) {
     }
 
@@ -30,6 +32,7 @@ final class SharesDTO
             'issue_size' => $this->issueSize,
             'sector' => $this->sector->toString(),
             'div_yield_flag' => $this->divYieldFlag,
+            'volume' => $this->volume->getValue()
         ];
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('issue_size');
             $table->string('sector');
             $table->boolean('div_yield_flag');
+            $table->unsignedBigInteger('volume')->nullable();
         });
     }
 

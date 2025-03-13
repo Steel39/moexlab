@@ -18,7 +18,8 @@ class WriteShareRepository implements WriteShareRepositoryInterface
         'short_enabled_flag',
         'issue_size',
         'sector',
-        'div_yield_flag'
+        'div_yield_flag',
+        'volume'
     ];
 
     /**
@@ -117,6 +118,27 @@ class WriteShareRepository implements WriteShareRepositoryInterface
             'issue_size' => $share->getIssueSize(),
             'sector' => (string)$share->getSector()->getSector(),
             'div_yield_flag' => $share->hasDividendYield(),
+            'volume' => $share->getVolume()
         ];
+    }
+
+    /**
+     * Обновляет недельный объем для заданной акции.
+     *
+     * @param InstrumentUid $instrumentUid Идентификатор инструмента.
+     * @param int $weeklyVolume Недельный объем.
+     */
+    public function bulkUpdateWeeklyVolumes(array $updates): void
+    {
+        DB::transaction(function () use ($updates) {
+            // Выполняем массовое обновление
+            foreach ($updates as $update) {
+                DB::table('shares')
+                    ->where('uid', $update['uid'])
+                    ->update([
+                        'volume' => $update['volume'],
+                    ]);
+            }
+        });
     }
 }

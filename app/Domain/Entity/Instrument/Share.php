@@ -4,19 +4,11 @@ namespace App\Domain\Entity\Instrument;
 
 use App\Domain\ValueObjects\Sector;
 use App\Domain\ValueObjects\InstrumentUid;
+use App\Domain\ValueObjects\Volume;
 use InvalidArgumentException;
 
 final class Share
 {
-    private InstrumentUid $uid;
-    private string $companyName;
-    private string $ticker;
-    private int $lot;
-    private bool $shortEnabledFlag;
-    private int $issueSize;
-    private Sector $sector;
-    private bool $divYieldFlag;
-
     /**
      * Конструктор с валидацией.
      *
@@ -28,16 +20,18 @@ final class Share
      * @param int $issueSize
      * @param Sector $sector
      * @param bool $divYieldFlag
+     * @param Volume $volume
      */
     public function __construct(
-        InstrumentUid $uid,
-        string $companyName,
-        string $ticker,
-        int $lot,
-        bool $shortEnabledFlag,
-        int $issueSize,
-        Sector $sector,
-        bool $divYieldFlag
+        private readonly InstrumentUid $uid,
+        private readonly string $companyName,
+        private readonly string $ticker,
+        private readonly int $lot,
+        private readonly bool $shortEnabledFlag,
+        private readonly int $issueSize,
+        private readonly Sector $sector,
+        private readonly bool $divYieldFlag,
+        private readonly Volume $volume
     ) {
         if ($lot <= 0) {
             throw new InvalidArgumentException('Lot size must be greater than zero.');
@@ -46,15 +40,6 @@ final class Share
         if ($issueSize <= 0) {
             throw new InvalidArgumentException('Issue size must be greater than zero.');
         }
-
-        $this->uid = $uid;
-        $this->companyName = $companyName;
-        $this->ticker = $ticker;
-        $this->lot = $lot;
-        $this->shortEnabledFlag = $shortEnabledFlag;
-        $this->issueSize = $issueSize;
-        $this->sector = $sector;
-        $this->divYieldFlag = $divYieldFlag;
     }
 
     /**
@@ -135,5 +120,10 @@ final class Share
     public function hasDividendYield(): bool
     {
         return $this->divYieldFlag;
+    }
+
+    public function getVolume(): Volume
+    {
+        return $this->volume;
     }
 }

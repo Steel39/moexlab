@@ -6,6 +6,7 @@ use App\Domain\Repositories\Instrument\Share\ReadShareRepositoryInterface;
 use App\Domain\Entity\Instrument\Share;
 use App\Domain\ValueObjects\InstrumentUid;
 use App\Domain\ValueObjects\Sector;
+use App\Domain\ValueObjects\Volume;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
@@ -44,7 +45,8 @@ class ReadShareRepository implements ReadShareRepositoryInterface
                 (bool)$data->short_enabled_flag,
                 (int)$data->issue_size,
                 new Sector($data->sector),
-                (bool)$data->div_yield_flag
+                (bool)$data->div_yield_flag,
+                new Volume($data->volume)
             );
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException("Invalid data for Share with UID: {$data->uid}", 0, $e);

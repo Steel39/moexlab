@@ -6,6 +6,7 @@ use App\Domain\Entity\Instrument\Share;
 use App\Domain\Repositories\Instrument\Share\ApiShareRepositoryInterface;
 use App\Domain\ValueObjects\InstrumentUid;
 use App\Domain\ValueObjects\Sector;
+use App\Domain\ValueObjects\Volume;
 use App\Infrastructure\Adapters\TClientAdapter;
 use Google\Protobuf\Internal\RepeatedField;
 use Tinkoff\Invest\V1\InstrumentsRequest;
@@ -69,7 +70,8 @@ class TInvestSharesRepository implements ApiShareRepositoryInterface
                         (bool)$instrument->getShortEnabledFlag(),
                         (int)$instrument->getIssueSize(),
                         new Sector($instrument->getSector()),
-                        (bool)$instrument->getDivYieldFlag()
+                        (bool)$instrument->getDivYieldFlag(),
+                        new Volume(0)
                     );
                 } catch (InvalidArgumentException $e) {
                     error_log("Invalid sector display name for Share with UID: {$instrument->getUid()}. Display name: {$instrument->getSector()}. Error: {$e->getMessage()}");

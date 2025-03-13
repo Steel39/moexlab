@@ -25,10 +25,10 @@ const handleDelete = () => {
     }
 };
 
-const updateVolume = (stockId) => {
-    router.patch(route('stocks.update-volume', stockId), {
+const updateVolumes = () => {
+    router.patch(route('shares.volumes.update'), {
         preserveScroll: true,
-        onSuccess: () => alert('Объем обновлен')
+        onSuccess: () => alert('Объемы обновлены')
     });
 };
 </script>
@@ -48,7 +48,7 @@ const updateVolume = (stockId) => {
                     <button @click="handleDelete" class="rounded hover:text-black hover:scale-105 duration-300">
                         Удалить акции
                     </button>
-                    <button @click="" class="rounded hover:text-black hover:scale-105 duration-300">
+                    <button @click="updateVolumes" class="rounded hover:text-black hover:scale-105 duration-300">
                         Обновить объемы
                     </button>
                 </div>
@@ -69,6 +69,9 @@ const updateVolume = (stockId) => {
                             </p>
                             <p>Выпущено бумаг:
                                 <span class="font-semibold">{{ share.issue_size}}</span>
+                            </p>
+                            <p>Недельный объем:
+                                <span class="font-semibold">{{ share.volume }}</span>
                             </p>
                             <p>Дивиденды:
                                 <span v-if="share.div_yield_flag" class="text-green-400 font-semibold">Да</span>
