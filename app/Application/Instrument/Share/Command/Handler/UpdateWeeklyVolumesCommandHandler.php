@@ -44,7 +44,7 @@ final readonly class UpdateWeeklyVolumesCommandHandler
                 'uid' => $instrument->getUid()->getValue(),
                 'volume' => $weeklyVolume
             ];
-            echo $instrument->getTicker() . ' - ' . $weeklyVolume . ' - ' . $instrument->getUid() . PHP_EOL;
+            echo $instrument->getTicker() . ' - ' . $weeklyVolume . ' - ' . $instrument->getUid()->getValue() . PHP_EOL;
         }
 
         // Массовое обновление в БД
@@ -52,18 +52,18 @@ final readonly class UpdateWeeklyVolumesCommandHandler
     }
 
     private static function getLastWeekPeriod(): array
-    {
-        $now = new \DateTimeImmutable('now');
+{
+    $now = new \DateTimeImmutable('now');
 
-        // Начало периода: 7 дней назад от текущей даты и времени
-        $fromDate = $now->modify('-7 days');
+    // Начало периода: полночь текущего дня минус 7 дней
+    $fromDate = $now->modify('today midnight -7 days');
 
-        // Конец периода: текущая дата и время
-        $toDate = $now;
+    // Конец периода: полночь текущего дня (исключая сегодняшний день)
+    $toDate = $now->modify('today midnight');
 
-        return [
-            'from' => $fromDate->getTimestamp(),
-            'to' => $toDate->getTimestamp(),
-        ];
-    }
+    return [
+        'from' => $fromDate->getTimestamp(),
+        'to' => $toDate->getTimestamp(),
+    ];
+}
 }

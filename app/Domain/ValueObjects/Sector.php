@@ -20,9 +20,8 @@ final class Sector
         'other' => 'Другие',
     ];
 
-    private string $sector;
 
-    public function __construct(string $sector)
+    public function __construct(private string $sector)
     {
         if (empty($sector)) {
             $sector = 'other';

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Market\Trade\ValueObject;
+namespace App\Domain\ValueObjects;
 
 use InvalidArgumentException;
 use Metaseller\TinkoffInvestApi2\exceptions\ValidateException;
@@ -8,7 +8,7 @@ use Metaseller\TinkoffInvestApi2\helpers\QuotationHelper;
 use Tinkoff\Invest\V1\MoneyValue;
 use Tinkoff\Invest\V1\Quotation;
 
-readonly class TradePriceValue
+readonly class Price
 {
     private float $value;
 
