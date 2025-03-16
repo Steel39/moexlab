@@ -23,31 +23,28 @@
   }
 
   .gradient-text {
-    background: linear-gradient(270deg, #ffdd00, #ff6f00, #ff2e00, #ff00c8, #000000, #00ff6f,
-                                    #8a00ff, #00c8ff, #00ff6f, #000000, #ff00c8,  #ff2e00, #ff6f00, #ffdd00);
-    background-size: 400% 400%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient 20s ease infinite;
+      background: linear-gradient(270deg, #ffdd00, #ff6f00, #ff2e00, #ff00c8, #000000, #00ff6f,
+      #8a00ff, #00c8ff, #00ff6f, #000000, #ff00c8, #ff2e00, #ff6f00, #ffdd00);
+      background-size: 400% 400%; /* Увеличиваем размер фона для плавности */
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent; /* Скрываем исходный цвет текста */
+      animation: gradient 20s ease infinite; /* Линейная анимация для бесшовности */
   }
 
   @keyframes gradient {
-    0% {
-      background-position: 1% 25%;
-    }
-      25% {
-          background-position: 25% 50%;
+      0% {
+          background-position: 1% 50%; /* Начало градиента */
       }
-    50% {
-      background-position: 50% 100%;
-    }
+      50% {
+          background-position: 51% 75%; /* Конец градиента */
+      }
       75% {
-          background-position: 100% 75%;
+          background-position: 75% 100%; /* Начало градиента */
       }
-    100% {
-      background-position: 75% 1%;
-    }
+      100% {
+          background-position: 50% 1%; /* Конец градиента */
+      }
   }
   </style>
 

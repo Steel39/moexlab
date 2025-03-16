@@ -99,8 +99,8 @@ class ClickHouseTradeRepository implements TradeRepositoryInterface
                     uid,
                     SUM(CASE WHEN direction = 1 THEN quantity ELSE 0 END) AS total_buy,
                     SUM(CASE WHEN direction = 2 THEN quantity ELSE 0 END) AS total_sell,
-                    anyIf(price, time = min_time) AS start_price,
-                    anyIf(price, time = max_time) AS end_price
+                    argMin(price, time) AS start_price,
+                    argMax(price, time) AS end_price
                 FROM (
                     SELECT
                         uid,

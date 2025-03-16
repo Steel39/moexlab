@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Repositories\Messaging\Trade;
 
 use App\Application\Market\Trade\DTOs\Market\TradeDTO;
+use App\Domain\Entity\Market\Trade;
 use App\Infrastructure\Adapters\RabbitMQAdapter;
 use PhpAmqpLib\Message\AMQPMessage;
 
@@ -14,18 +15,18 @@ class TradeMessagePublish
     {
     }
 
-    public function execute(TradeDTO $message)
+    public function execute(Trade $message)
     {
         $connection = $this->adapter->getConnection();
         $channel = $connection->channel();
         $channel->exchange_declare('market', 'direct', false, true, false);
         $channel->queue_declare('trades_queue', false, true, false, false);
         $data = [
-            'uid' => $message->instrument_uid->getUid(),
-            'direction' => $message->direction->toInt(),
-            'price' => $message->price->getFloatPrice(),
-            'quantity' => $message->quantity->getQuantity(),
-            'time' => $message->time->getSeconds(),
+            'uid' => $message->getUid()->toString(),
+            'direction' => $message->getDirection()->toInt(),
+            'price' => $message->getPrice()->getFloatPrice(),
+            'quantity' => $message->getVolume()->getValue(),
+            'time' => $message->getTradeTime()->getSeconds(),
         ];
         $data = json_encode($data);
         $msg = new AMQPMessage($data,

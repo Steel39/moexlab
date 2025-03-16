@@ -1,6 +1,6 @@
 <template>
     <button @click="getLink(link)" :class="`block bg-gray-800 p-6 rounded-lg  transition-shadow-transform duration-300
-     transform hover:scale-105 shadow-xl ${shadowColor}`">
+     transform hover:scale-105 shadow-lg ${shadowColor}`">
         <h3 class="text-2xl font-semibold text-white">{{ title }}</h3>
         <p class="text-gray-300">{{ description }}</p>
     </button>

@@ -11,7 +11,7 @@ readonly class GetTradesByTimeHandler
     {
     }
 
-    public function handle(GetTradesByTimeQuery $query)
+    public function __invoke(GetTradesByTimeQuery $query)
     {
         return $this->tradeRepository->getSumTrades($query->getPeriodTime());
     }

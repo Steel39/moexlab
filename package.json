@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "chart.js": "^4.4.8",
+        "tippy": "^0.0.0",
         "vue-chartjs": "^5.3.2"
     }
 }

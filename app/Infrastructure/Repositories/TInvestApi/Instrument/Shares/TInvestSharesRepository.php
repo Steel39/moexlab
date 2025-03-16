@@ -35,7 +35,7 @@ class TInvestSharesRepository implements ApiShareRepositoryInterface
     {
         [$response, $status] = $this->adapter->getClientFactory()
             ->instrumentsServiceClient
-            ->Shares($this->request->setInstrumentStatus(InstrumentStatus::INSTRUMENT_STATUS_ALL))
+            ->Shares($this->request->setInstrumentStatus(InstrumentStatus::INSTRUMENT_STATUS_BASE))
             ->wait();
 
         $instruments = $response->getInstruments();

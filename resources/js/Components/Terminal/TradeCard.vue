@@ -1,15 +1,49 @@
 <template>
-    <div :style="{ boxShadow: shadowStyle }" class="bg-gray-800 rounded-lg p-4
-    hover:scale-105 transition-transform duration-300">
-        <h2 class="text-xl font-semibold text-orange-400">{{ ticker }}</h2>
+    <div v-if="isLoading" class="flex justify-center items-center h-20">
+        <svg class="animate-spin h-5 w-5 text-blue-500" viewBox="0 0 24 24"></svg>
+    </div>
+    <div
+        v-else
+        :style="{ boxShadow: shadowStyle }"
+        class="bg-gradient-to-br from-stone-600/60 to-stone-900/60 border-2 border-gray-950 rounded-lg p-4 hover:scale-105 transition-all duration-300"
+    >
+        <!-- Заголовок с кликабельным тикером -->
+        <h2
+            aria-label="Stock ticker"
+            class="text-2xl font-bold font-mono text-gray-200/60 drop-shadow-2xl cursor-pointer"
+            @click="handleTickerClick"
+        >
+            {{ ticker }}
+        </h2>
+
+        <!-- Основная информация -->
         <div class="flex justify-between mt-2">
             <div>
-                <p class="text-green-400 font-bold">{{ purchaseVolume }}</p>
-                <p class="text-red-400 first:font-bold">{{ saleVolume }}</p>
+                <!-- Объем покупок -->
+                <p
+                    v-tippy="'Объем покупок'"
+                    class="text-green-500 text-shadow font-bold flex items-center"
+                >
+                    {{ formattedPurchaseVolume }}
+                </p>
+
+                <!-- Объем продаж -->
+                <p
+                    v-tippy="'Объем продаж'"
+                    class="text-red-600 font-bold flex items-center"
+                >
+                    {{ formattedSaleVolume }}
+                </p>
             </div>
+
             <div>
-                <p class="text-white"><span :class="priceChangeClass">{{ priceChange }}</span></p>
-                <p class="text-white">{{ relativeVolume }}</p>
+                <!-- Изменение цены -->
+                <p class="text-white font-serif">
+                    <span :class="priceChangeClass">{{ formattedPriceChange }}%</span>
+                </p>
+
+                <!-- Относительный объем -->
+                <p class="text-gray-100/40">{{ formattedRelativeVolume }}</p>
             </div>
         </div>
     </div>
@@ -33,24 +67,66 @@ const props = defineProps({
         required: true,
     },
     priceChange: {
-        type: Float32Array,
+        type: Number,
         required: true,
     },
     relativeVolume: {
-        type: Float32Array,
+        type: Number,
         required: true,
+    },
+    isLoading: {
+        type: Boolean,
+        default: false,
     },
 });
 
+// Форматирование чисел
+const formattedPurchaseVolume = computed(() => {
+    return new Intl.NumberFormat('en-US').format(props.purchaseVolume);
+});
+
+const formattedSaleVolume = computed(() => {
+    return new Intl.NumberFormat('en-US').format(props.saleVolume);
+});
+
+const formattedPriceChange = computed(() => {
+    return props.priceChange.toFixed(2);
+});
+
+const formattedRelativeVolume = computed(() => {
+    return props.relativeVolume.toFixed(2);
+});
+
+// Вычисляемое свойство для класса изменения цены
+const priceChangeClass = computed(() => {
+    return props.priceChange > 0 ? 'text-green-500' : 'text-red-500';
+});
+
+// Вычисляемое свойство для соотношения покупок и продаж
+const purchaseRatio = computed(() => {
+    const totalVolume = props.purchaseVolume + props.saleVolume;
+    return totalVolume > 0 ? props.purchaseVolume / totalVolume : 0;
+});
+
+const gradientStyle = computed(() => {
+    const totalVolume = props.purchaseVolume + props.saleVolume;
+    if (totalVolume === 0) return {};
+
+    const purchaseRatio = props.purchaseVolume / totalVolume;
+
+    // Градиент от зеленого (покупки) до красного (продажи)
+    return {
+        background: `linear-gradient(90deg, #10b981 ${purchaseRatio * 100}%, #f43f5e ${purchaseRatio * 100}%)`,
+        width: '100%',
+    };
+});
 // Вычисляемое свойство для стиля тени
 const shadowStyle = computed(() => {
-    // Определяем размер тени в зависимости от относительного объема, увеличивая его в 3 раза
     let shadowSize = 80 * props.relativeVolume;
     if (shadowSize > 80) {
         shadowSize = 80;
     }
 
-    // Определяем цвет тени в зависимости от преобладания покупок или продаж
     let shadowColor = 'rgba(0, 0, 0, 0.8)'; // Цвет по умолчанию
 
     const totalVolume = props.purchaseVolume + props.saleVolume;
@@ -58,28 +134,32 @@ const shadowStyle = computed(() => {
     const saleRatio = props.saleVolume / totalVolume;
 
     if (totalVolume > 0) {
-        // Определяем цвет тени в зависимости от преобладания покупок или продаж
         if (purchaseRatio > saleRatio) {
-            // Преобладают покупки
-            const ratio = Math.min(1, purchaseRatio); // Убедимся, что ratio не превышает 1
-            const redIntensity = Math.round(255 * (1 - ratio)); // Красный компонент уменьшается
-            const greenIntensity = Math.round(255 * ratio); // Зеленый компонент увеличивается
-            shadowColor = `rgba(${redIntensity}, ${greenIntensity}, 0, 1)`; // Переход от красного к зеленому
+            const ratio = Math.min(1, purchaseRatio);
+            const redIntensity = Math.round(255 * (1 - ratio));
+            const greenIntensity = Math.round(255 * ratio);
+            shadowColor = `rgba(${redIntensity}, ${greenIntensity}, 0, 1)`;
         } else {
-            // Преобладают продажи
-            const ratio = Math.min(1, saleRatio); // Убедимся, что ratio не превышает 1
-            const greenIntensity = Math.round(255 * (1 - ratio)); // Зеленый компонент уменьшается
-            const redIntensity = Math.round(255 * ratio); // Красный компонент увеличивается
-            shadowColor = `rgba(${redIntensity}, ${greenIntensity}, 0, 1)`; // Переход от зеленого к красному
+            const ratio = Math.min(1, saleRatio);
+            const greenIntensity = Math.round(255 * (1 - ratio));
+            const redIntensity = Math.round(255 * ratio);
+            shadowColor = `rgba(${redIntensity}, ${greenIntensity}, 0, 1)`;
         }
     }
 
-    return `0 0 ${shadowSize}px ${shadowColor}`; // Устанавливаем размер и цвет тени
+    return `0 0 ${shadowSize}px ${shadowColor}`;
 });
+
+// Обработчик клика по тикеру
+const handleTickerClick = () => {
+    console.log(`Clicked on ticker: ${props.ticker}`);
+    // Здесь можно добавить логику для перехода на другую страницу или открытия модального окна
+};
 </script>
 
 <style scoped>
 /* Добавьте любые дополнительные стили, если необходимо */
+.text-shadow {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
 </style>
-
-Найти еще

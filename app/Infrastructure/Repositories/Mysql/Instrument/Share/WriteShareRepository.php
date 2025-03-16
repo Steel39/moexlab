@@ -110,7 +110,7 @@ class WriteShareRepository implements WriteShareRepositoryInterface
     private function toArray(Share $share): array
     {
         return [
-            'uid' => (string)$share->getUid(),
+            'uid' => (string)$share->getUid()->toString(),
             'company_name' => $share->getCompanyName(),
             'ticker' => $share->getTicker(),
             'lot' => $share->getLot(),

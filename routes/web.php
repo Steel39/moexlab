@@ -6,6 +6,7 @@ use App\Http\Controllers\UI\Admin\Shares\Command\DeleteSharesFromLocalRepository
 use App\Http\Controllers\UI\Admin\Shares\Command\SaveSharesFromApi;
 use App\Http\Controllers\UI\Admin\Shares\Command\UpdateWeeklyVolumesOfShares;
 use App\Http\Controllers\UI\Admin\Shares\GetSharesBoard;
+use App\Http\Controllers\UI\Admin\Stream\StreamController;
 use App\Http\Controllers\UI\User\MOEX\Trades\SharesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +33,9 @@ Route::middleware('auth')->prefix('/admin')->group( function() {
         Route::delete('/', DeleteSharesFromLocalRepository::class)->name('shares.delete');
         Route::get('/load', SaveSharesFromApi::class)->name('shares.load');
         Route::patch('/update_volumes_weekly', UpdateWeeklyVolumesOfShares::class)->name('shares.volumes.update');
+    });
+    Route::prefix('/streams')->group( function() {
+        Route::get('/streams', StreamController::class)->name('streams.board');
     });
 });
 

@@ -8,17 +8,17 @@ use function Pest\Laravel\instance;
 readonly class TotalVolumeTradesDTO
 {
     public function __construct(
-        public readonly string $uid,
-        public readonly int $totalBuyVolume,
-        public readonly int $totalSellVolume,
-        public readonly float $startPrice,
-        public readonly float $endPrice,
+        public  string $uid,
+        public  int $totalBuyVolume,
+        public  int $totalSellVolume,
+        public  float $startPrice,
+        public  float $endPrice,
 
     )
     {
     }
 
-    public static function fromArray(array $trades)
+    public static function fromArray(array $trades): self
     {
         return new TotalVolumeTradesDTO(
             $trades['uid'],

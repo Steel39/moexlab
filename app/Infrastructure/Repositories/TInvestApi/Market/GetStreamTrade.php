@@ -45,12 +45,11 @@ class GetStreamTrade
 
                 // Получаем список инструментов
                 $instrumentServiceClient = $this->adapter->getClientFactory()->instrumentsServiceClient;
-                $allInstruments = $this->instrumentsRequest->setInstrumentStatus(InstrumentStatus::INSTRUMENT_STATUS_ALL);
+                $allInstruments = $this->instrumentsRequest->setInstrumentStatus(InstrumentStatus::INSTRUMENT_STATUS_BASE);
 
                 [$instrumentsServiceResponse, $instrumentsStatus] = $instrumentServiceClient
                     ->Shares($allInstruments)
                     ->wait();
-
                 $requestedInstruments = $instrumentsServiceResponse->getInstruments();
                 $tradingInstruments = $this->getTradesInstrument($requestedInstruments);
 
@@ -81,10 +80,8 @@ class GetStreamTrade
                                 new Volume($trade->getQuantity()),
                                 TradeTime::fromTimestamp($trade->getTime())
                             );
-                            echo $trade->getDirection() . ' - ' . $trade->getInstrumentUid() . ' - ' .  $trade->getQuantity() . PHP_EOL;
 
-                            // Передаем сделку в команду
-                            //$command->execute($tradeEntity);
+                            $command->execute($tradeEntity);
                         }
                     }
 

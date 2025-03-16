@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col min-h-screen bg-black text-white">
+    <div class="flex flex-col min-h-screen bg-stone-700/80 text-white">
         <header class="text-center p-2">
             <div class="flex flex-row justify-between">
                 <Logo />
@@ -9,7 +9,7 @@
         <main class="flex-grow">
             <section id="features" class="py-10">
                 <div class="container mx-auto px-4">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="grid grid-cols-1 md:grid-cols-3 shadow-sm gap-6 text-center">
                         <ServiceCard
                             title="Интерактивные графики"
                             description="Визуализированные данные о торгах на фондовом и срочном рынке."

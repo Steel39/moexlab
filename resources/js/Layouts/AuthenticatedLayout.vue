@@ -5,7 +5,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import {Link, router} from '@inertiajs/vue3';
 import Logo from "@/Components/Header/Logo.vue";
 
 const showingNavigationDropdown = ref(false);
@@ -13,7 +13,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-stone-800/40">
+        <div class="min-h-screen bg-stone-500/80">
             <nav
                 class="border-b  gradient-text bg-slate-300/50"
             >
@@ -39,10 +39,10 @@ const showingNavigationDropdown = ref(false);
                                     Акции
                                 </NavLink>
                                 <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :href="route('streams.board')"
+                                    :active="route().current('streams.board')"
                                 >
-                                    Фьючерсы
+                                    Stream's
                                 </NavLink>
                             </div>
                         </div>

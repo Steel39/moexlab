@@ -1,89 +1,89 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, router } from '@inertiajs/vue3';
+    <script setup>
+    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import { Head, router } from '@inertiajs/vue3';
 
-const props = defineProps({
-    shares: {
-        type: Array,
-        default: () => []
-    }
-});
-
-const handleUpload = () => {
-    router.get(route('shares.load'), {
-        preserveScroll: true,
-        onSuccess: () => alert('Акции успешно загружены')
+    const props = defineProps({
+        shares: {
+            type: Array,
+            default: () => []
+        }
     });
-};
 
-const handleDelete = () => {
-    if (confirm('Вы уверены, что хотите удалить все акции?')) {
-        router.delete(route('shares.delete'), {
+    const handleUpload = () => {
+        router.get(route('shares.load'), {
             preserveScroll: true,
-            onSuccess: () => alert('Акции успешно удалены')
+            onSuccess: () => alert('Акции успешно загружены')
         });
-    }
-};
+    };
 
-const updateVolumes = () => {
-    router.patch(route('shares.volumes.update'), {
-        preserveScroll: true,
-        onSuccess: () => alert('Объемы обновлены')
-    });
-};
-</script>
+    const handleDelete = () => {
+        if (confirm('Вы уверены, что хотите удалить все акции?')) {
+            router.delete(route('shares.delete'), {
+                preserveScroll: true,
+                onSuccess: () => alert('Акции успешно удалены')
+            });
+        }
+    };
 
-<template>
+    const updateVolumes = () => {
+        router.patch(route('shares.volumes.update'), {
+            preserveScroll: true,
+            onSuccess: () => alert('Объемы обновлены')
+        });
+    };
+    </script>
 
-    <Head title="Панель управления" />
+    <template>
 
-    <AuthenticatedLayout>
-        <div class="px-5">
-            <div class="mx-auto ">
-                <!-- Панель управления -->
-                <div class="flex justify-end font-sans font-semibold text-stone-700 gap-4 p-4">
-                    <button @click="handleUpload" class="rounded  hover:text-black hover:scale-105 duration-300">
-                        Загрузить акции
-                    </button>
-                    <button @click="handleDelete" class="rounded hover:text-black hover:scale-105 duration-300">
-                        Удалить акции
-                    </button>
-                    <button @click="updateVolumes" class="rounded hover:text-black hover:scale-105 duration-300">
-                        Обновить объемы
-                    </button>
-                </div>
+        <Head title="Панель управления" />
 
-                <!-- Список акций -->
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6">
-                    <div v-for="share in shares" class="overflow-hidden rounded-lg bg-gray-400/70 p-6 shadow-xl
-                    hover:bg-gray-400/40 shadow-stone-200/50 hover:scale-105 duration-200 transition-all">
-                        <h3 class="mb-4 text-xl text-center font-bold text-gray-900/90 ">{{ share.company_name }}</h3>
-                        <div class="space-y-2">
-                            <p>Тикер: <span class="font-semibold">{{ share.ticker}}</span></p>
-                            <p>UID: <span class="font-semibold">{{ share.uid}}</span></p>
-                            <p>Сектор: <span class="font-semibold">{{ share.sector }}</span></p>
-                            <p>Лотность: <span class="font-semibold">{{ share.lot}}</span></p>
-                            <p>Short:
-                                <span v-if="share.short_enabled_flag" class="font-semibold text-green-400">Да</span>
-                                <span v-else class="font-semibold text-red-500">Нет</span>
-                            </p>
-                            <p>Выпущено бумаг:
-                                <span class="font-semibold">{{ share.issue_size}}</span>
-                            </p>
-                            <p>Недельный объем:
-                                <span class="font-semibold">{{ share.volume }}</span>
-                            </p>
-                            <p>Дивиденды:
-                                <span v-if="share.div_yield_flag" class="text-green-400 font-semibold">Да</span>
-                                <span v-else class="text-red-500 font-semibold">Нет</span>
-                            </p>
-                        </div>
-                        <div class="mt-6 flex gap-4 text-gray-800/50 shadow-lg">
+        <AuthenticatedLayout>
+            <div class="px-5">
+                <div class="mx-auto ">
+                    <!-- Панель управления -->
+                    <div class="flex justify-end font-sans font-semibold text-stone-700 gap-4 p-4">
+                        <button @click="handleUpload" class="rounded  hover:text-black hover:scale-105 duration-300">
+                            Загрузить акции
+                        </button>
+                        <button @click="handleDelete" class="rounded hover:text-black hover:scale-105 duration-300">
+                            Удалить акции
+                        </button>
+                        <button @click="updateVolumes" class="rounded hover:text-black hover:scale-105 duration-300">
+                            Обновить объемы
+                        </button>
+                    </div>
 
+                    <!-- Список акций -->
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6">
+                        <div v-for="share in shares" class="overflow-hidden rounded-lg bg-gray-400/70 p-6 shadow-xl
+                        hover:bg-gray-400/40 shadow-stone-200/50 hover:scale-105 duration-200 transition-all">
+                            <h3 class="mb-4 text-xl text-center font-bold text-gray-900/90 ">{{ share.company_name }}</h3>
+                            <div class="space-y-2">
+                                <p>Тикер: <span class="font-semibold">{{ share.ticker}}</span></p>
+                                <p>UID: <span class="font-semibold">{{ share.uid}}</span></p>
+                                <p>Сектор: <span class="font-semibold">{{ share.sector }}</span></p>
+                                <p>Лотность: <span class="font-semibold">{{ share.lot}}</span></p>
+                                <p>Short:
+                                    <span v-if="share.short_enabled_flag" class="font-semibold text-green-400">Да</span>
+                                    <span v-else class="font-semibold text-red-500">Нет</span>
+                                </p>
+                                <p>Выпущено бумаг:
+                                    <span class="font-semibold">{{ share.issue_size}}</span>
+                                </p>
+                                <p>Недельный объем:
+                                    <span class="font-semibold">{{ share.volume }}</span>
+                                </p>
+                                <p>Дивиденды:
+                                    <span v-if="share.div_yield_flag" class="text-green-400 font-semibold">Да</span>
+                                    <span v-else class="text-red-500 font-semibold">Нет</span>
+                                </p>
+                            </div>
+                            <div class="mt-6 flex gap-4 text-gray-800/50 shadow-lg">
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </AuthenticatedLayout>
-</template>
+        </AuthenticatedLayout>
+    </template>
