@@ -1,7 +1,7 @@
 <template>
     <button
         @click="getRoute(route)"
-        :class="`p-1 text-xl font-sans bg-red-400/20 rounded-md ${buttonColor} hover:scale-110 transition-all duration-300 font-semibold`">
+        :class="`p-1 text-xl font-sans  rounded-md text-slate-900 drop-shadow-md hover:scale-110 transition-all duration-300 font-semibold`">
         {{ name }}
     </button>
 </template>
@@ -18,14 +18,8 @@ const props = defineProps({
     route: {
         type: String,
         required: true,
-    },
-    color: {
-        type: String,
-        required: true
     }
 });
-
-const buttonColor = `text-${props.color}-400`;
 
 const getRoute = (routeName) => {
     router.visit(route(routeName), {

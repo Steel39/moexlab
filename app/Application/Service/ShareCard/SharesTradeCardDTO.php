@@ -4,6 +4,7 @@ namespace App\Application\Service\ShareCard;
 
 use App\Domain\ValueObjects\DifferentPrice;
 use App\Domain\ValueObjects\InstrumentUid;
+use App\Domain\ValueObjects\Price;
 use App\Domain\ValueObjects\RelativeVolume;
 use App\Domain\ValueObjects\Volume;
 
@@ -27,7 +28,9 @@ class SharesTradeCardDTO
         public readonly Volume $buyVolume,
         public readonly Volume $sellVolume,
         public readonly DifferentPrice $differentPrice,
-        public readonly RelativeVolume $relativeVolume
+        public readonly RelativeVolume $relativeVolume,
+        public readonly Price $averagePriceBuy,
+        public readonly Price $averagePriceSell
     ) {
     }
 
@@ -45,10 +48,14 @@ class SharesTradeCardDTO
             'sector' => $this->sector,
             'buy_volume' => $this->buyVolume->getValue(),
             'sell_volume' => $this->sellVolume->getValue(),
+            'firstPrice' => $this->differentPrice->getStartPrice(),
+            'endPrice' => $this->differentPrice->getEndPrice(),
             'price_difference' => $this->differentPrice->getDifference(),
             'price_change_percentage' => $this->differentPrice->getChangePercentage(),
             'relative_volume' => $this->relativeVolume->getValue(),
             'relative_volume_percentage' => $this->relativeVolume->getPercentage(),
+            'average_price_buy' => $this->averagePriceBuy->getFloatPrice(),
+            'average_price_sell' => $this->averagePriceSell->getFloatPrice(),
         ];
     }
 }

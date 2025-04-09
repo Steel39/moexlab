@@ -22,14 +22,13 @@ final readonly class TradeDTO
 
     public static function toArray(TradeDTO $tradeDTO): array
     {
-        $array_data = [
+        return [
             'instrument_uid' => $tradeDTO->instrument_uid->getUid(),
             'direction' => $tradeDTO->direction->toInt(),
             'price' => $tradeDTO->price->getFloatPrice(),
             'quantity' => $tradeDTO->quantity->getQuantity(),
             'time' => $tradeDTO->time->getSeconds(),
         ];
-        return $array_data;
     }
 
     public static function fromArray(array $array): TradeDTO

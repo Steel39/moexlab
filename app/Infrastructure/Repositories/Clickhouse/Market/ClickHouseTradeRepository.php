@@ -90,42 +90,41 @@ class ClickHouseTradeRepository implements TradeRepositoryInterface
     /**
      * @return  array
      */
+
     public function getSumTrades(TradePeriodTimeDTO $periodTime): array
     {
         try {
             $connection = $this->adapter->getConnection();
-            $data = $connection->select(sql:  '
-                SELECT
-                    uid,
-                    SUM(CASE WHEN direction = 1 THEN quantity ELSE 0 END) AS total_buy,
-                    SUM(CASE WHEN direction = 2 THEN quantity ELSE 0 END) AS total_sell,
-                    argMin(price, time) AS start_price,
-                    argMax(price, time) AS end_price
-                FROM (
-                    SELECT
-                        uid,
-                        quantity,
-                        price,
-                        time,
-                        direction,
-                        min(time) OVER (PARTITION BY uid) AS min_time,
-                        max(time) OVER (PARTITION BY uid) AS max_time
-                    FROM trades
-                    WHERE time BETWEEN ' . $periodTime->beginTimeValue->getSeconds() . ' AND ' . $periodTime->endTimeValue->getSeconds() . '
-                ) AS subquery
-                GROUP BY uid
-                FORMAT JSON
-');
-        } catch (\Exception $exception)
-        {
-            throw new Exception($exception->getMessage());
+            $data = $connection->select(sql: '
+            SELECT
+                uid,
+                sumIf(quantity, direction = 1) AS total_buy_quantity,
+                sumIf(quantity, direction = 2) AS total_sell_quantity,
+
+                argMin(price, time) AS first_trade_price,
+                min(time) AS first_trade_time,
+                argMax(price, time) AS last_trade_price,
+                max(time) AS last_trade_time,
+
+                round(avgIf(price, direction = 1), 2) AS avg_buy_price,
+                round(avgIf(price, direction = 2), 2) AS avg_sell_price
+            FROM trades
+            WHERE time BETWEEN ' . $periodTime->beginTimeValue->getSeconds() . ' AND ' . $periodTime->endTimeValue->getSeconds() . '
+            GROUP BY uid
+            ORDER BY uid;
+    ');
+        } catch (\Exception $exception) {
+            throw new \Exception("Error fetching trade data: " . $exception->getMessage());
         }
+
+        // Преобразуем данные в массив DTO
         $tradesDto = [];
         $trades = $data->rows();
         foreach ($trades as $trade) {
             $tradeDTO = TotalVolumeTradesDTO::fromArray($trade);
             $tradesDto[] = $tradeDTO;
         }
+
         return $tradesDto;
     }
 

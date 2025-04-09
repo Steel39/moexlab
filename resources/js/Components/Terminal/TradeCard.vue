@@ -5,7 +5,7 @@
     <div
         v-else
         :style="{ boxShadow: shadowStyle }"
-        class="bg-gradient-to-br from-stone-600/60 to-stone-900/60 border-2 border-gray-950 rounded-lg p-4 hover:scale-105 transition-all duration-300"
+        class="bg-stone-800/40 border-2 border-gray-950 rounded-lg p-4 hover:scale-105 transition-all duration-300"
     >
         <!-- Заголовок с кликабельным тикером -->
         <h2
@@ -15,6 +15,7 @@
         >
             {{ ticker }}
         </h2>
+
 
         <!-- Основная информация -->
         <div class="flex justify-between mt-2">
@@ -33,6 +34,14 @@
                     class="text-red-600 font-bold flex items-center"
                 >
                     {{ formattedSaleVolume }}
+                </p>
+            </div>
+            <div>
+                <p class="text-green-500 text-shadow font-bold flex items-center">
+                    {{ avgPriceBuy }}
+                </p>
+                <p class="text-red-600 font-bold flex items-center">
+                    {{ avgPriceSell }}
                 </p>
             </div>
 
@@ -78,6 +87,13 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    avgPriceBuy: {
+        type: Number
+    },
+    avgPriceSell: {
+        type: Number
+    }
+
 });
 
 // Форматирование чисел

@@ -13,7 +13,7 @@ readonly class Price
     private float $value;
 
     /**
-     * @param MoneyValue|Quotation|float|string $price Значение цены
+     * @param MoneyValue|Quotation|float|string|null $price Значение цены
      * @throws InvalidArgumentException Если цена недопустима
      */
     public function __construct(private mixed $price)
@@ -54,16 +54,16 @@ readonly class Price
             }
         } elseif ($price instanceof MoneyValue) {
             try {
-                // Для MoneyValue используем units и nano для расчета значения
-                $units = $price->getUnits();
-                $nano = $price->getNano();
-                $this->value = $units + ($nano / 1_000_000_000); // Переводим nano в дробную часть
+                $this->value = QuotationHelper::toDecimal($price);
             } catch (\Throwable $e) {
                 throw new InvalidArgumentException("Failed to convert MoneyValue to price: " . $e->getMessage());
             }
         } elseif (is_float($price)) {
             $this->value = $price;
-        } elseif (is_string($price)) {
+        } elseif ($price === null) {
+            $this->value = QuotationHelper::toDecimal(0.0);
+        }
+        elseif (is_string($price)) {
             if (!is_numeric($price)) {
                 throw new InvalidArgumentException("Invalid string price value: {$price}");
             }
@@ -73,8 +73,9 @@ readonly class Price
         }
 
         // Дополнительная проверка на корректность значения
-        if ($this->value <= 0) {
+        if ($this->value <   0) {
             throw new InvalidArgumentException("Price must be greater than zero. Provided value: {$this->value}");
         }
+
     }
 }

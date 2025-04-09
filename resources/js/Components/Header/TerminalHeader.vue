@@ -2,7 +2,7 @@
     <h1 class="text-3xl  font-bold"></h1>
     <header class="flex p-2 gap-4 bg-transparent">
         <Logo/>
-        <div class="flex gap-2 mx-10">
+        <div class="flex gap-2 justify-center mx-10">
             <TerminalHeaderButton
                 v-for="button in headerButton"
                 :name="button.name"
@@ -27,11 +27,6 @@ const headerButton = ref([
         color: 'red',
         route: 'getTradesOnSharesPerDay'
     },
-    {
-        name: 'Фьючерсы',
-        color: 'orange',
-        route: 'getTradeOnFuturesPerDay'
-    }
 ])
 
 

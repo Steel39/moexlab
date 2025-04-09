@@ -54,16 +54,19 @@ readonly class ShareTradeCardService
         $sharesData = self::mergeSharesAndTrades($shares, $trades);
         $sharesCard = [];
         foreach ($sharesData as $shareCard) {
-            $totalVolume = $shareCard['total_buy'] + $shareCard['total_sell'];
+            $totalVolume = $shareCard['total_buy_quantity'] + $shareCard['total_sell_quantity'];
             $sharesCard[] = new SharesTradeCardDTO(
                 new InstrumentUid($shareCard['uid']),
                 $shareCard['ticker'],
                 $shareCard['company_name'],
                 $shareCard['sector'],
-                new Volume($shareCard['total_buy']),
-                new Volume($shareCard['total_sell']),
-                new DifferentPrice(new Price($shareCard['start_price']), new Price($shareCard['end_price'])),
+                new Volume($shareCard['total_buy_quantity']),
+                new Volume($shareCard['total_sell_quantity']),
+                new DifferentPrice(new Price($shareCard['first_trade_price']), new Price($shareCard['last_trade_price'])),
                 new RelativeVolume(new Volume($shareCard['volume']), new  Volume($totalVolume)),
+                new Price($shareCard['avg_buy_price']),
+                new Price($shareCard['avg_sell_price']),
+
             );
         }
         return $sharesCard;

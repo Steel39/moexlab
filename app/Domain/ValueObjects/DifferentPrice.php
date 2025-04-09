@@ -27,6 +27,16 @@ readonly class DifferentPrice
         $this->priceChangePercentage = ($this->priceDifference / $startPrice->getFloatPrice()) * 100;
     }
 
+    public function getStartPrice(): Price
+    {
+        return $this->startPrice;
+    }
+
+    public function getEndPrice(): Price
+    {
+        return $this->endPrice;
+    }
+
     /**
      * Возвращает абсолютное изменение цены.
      */

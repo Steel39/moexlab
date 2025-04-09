@@ -21,7 +21,7 @@ use Tinkoff\Invest\V1\TradeInstrument;
 
 class GetStreamTrade
 {
-    const TRADING_STATUS = 5; // Активный торговый статус
+    const TRADING_STATUS = 14; // Активный торговый статус
     const COUNTRY_OF_RISK = 'RU'; // Страна риска
     const STREAM_TIMEOUT = 120; // Таймаут в секундах (2 минуты)
     const MAX_RECONNECT_ATTEMPTS = 5; // Максимальное количество попыток переподключения
