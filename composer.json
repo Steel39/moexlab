@@ -16,7 +16,9 @@
         "metaseller/tinkoff-invest-api-v2-php": "^0.4.13",
         "php-amqplib/php-amqplib": "^2.8",
         "smi2/phpclickhouse": "^1.6",
-        "tightenco/ziggy": "^2.0"
+        "tightenco/ziggy": "^2.0",
+        "grpc/grpc": "^1.66.0",
+        "google/protobuf": "^4.29.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

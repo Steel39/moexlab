@@ -14,7 +14,12 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl && \
+    curl \
+    # Добавляем зависимости для grpc
+    libgrpc-dev \
+    protobuf-compiler \
+    libprotobuf-dev \
+    && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     docker-php-ext-install pdo_mysql mbstring bcmath zip exif pcntl && \
@@ -24,12 +29,13 @@ RUN apt-get update && apt-get install -y \
     # Clear cache
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#install grpc
-RUN pecl install grpc
-
+# Install Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
 
-# Add user for laravel application
+# Install gRPC extension
+RUN pecl install grpc && docker-php-ext-enable grpc
+
+# Add user for Laravel application
 RUN groupadd -g 1000 www && useradd -u 1000 -ms /bin/bash -g www www
 
 COPY --chown=www:www . /var/www
@@ -37,5 +43,6 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-# Expose port 9000 and start php-fpm server
+# Expose port 9000 and start PHP-FPM server
 EXPOSE 9000
+CMD ["php-fpm"]
