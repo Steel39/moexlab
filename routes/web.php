@@ -7,6 +7,7 @@ use App\Http\Controllers\UI\Admin\Shares\Command\SaveSharesFromApi;
 use App\Http\Controllers\UI\Admin\Shares\Command\UpdateWeeklyVolumesOfShares;
 use App\Http\Controllers\UI\Admin\Shares\GetSharesBoard;
 use App\Http\Controllers\UI\Admin\Stream\StreamController;
+use App\Http\Controllers\UI\Admin\Stream\TradesStreamController;
 use App\Http\Controllers\UI\User\MOEX\Trades\SharesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +37,7 @@ Route::middleware('auth')->prefix('/admin')->group( function() {
     });
     Route::prefix('/streams')->group( function() {
         Route::get('/streams', StreamController::class)->name('streams.board');
+        Route::get('/stream_start', TradesStreamController::class)->name('stream.start');
     });
 });
 
