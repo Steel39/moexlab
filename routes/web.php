@@ -37,7 +37,7 @@ Route::middleware('auth')->prefix('/admin')->group( function() {
     });
     Route::prefix('/streams')->group( function() {
         Route::get('/streams', StreamController::class)->name('streams.board');
-        Route::get('/stream_start', TradesStreamController::class)->name('stream.start');
+        Route::post('/stream_start', TradesStreamController::class)->name('stream.start');
     });
 });
 
