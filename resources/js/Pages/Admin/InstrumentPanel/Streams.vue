@@ -12,7 +12,7 @@ const props = defineProps({
 // Запуск стрима
 const startStream = () => {
     if (confirm('Вы уверены, что хотите запустить стрим?')) {
-        router.post(route('stream.start'), {
+        router.get(route('stream.start'), {
             preserveScroll: true,
             onSuccess: () => alert('Стрим успешно запущен')
         });
@@ -22,7 +22,7 @@ const startStream = () => {
 // Остановка стрима
 const stopStream = () => {
     if (confirm('Вы уверены, что хотите остановить стрим?')) {
-        router.delete(route('stream.stop'), {
+        router.get(route('stream.stop'), {
             preserveScroll: true,
             onSuccess: () => alert('Стрим успешно остановлен')
         });
@@ -32,7 +32,7 @@ const stopStream = () => {
 // Перезапуск стрима
 const restartStream = () => {
     if (confirm('Вы уверены, что хотите перезапустить стрим?')) {
-        router.patch(route('stream.restart'), {
+        router.get(route('stream.restart'), {
             preserveScroll: true,
             onSuccess: () => alert('Стрим успешно перезапущен')
         });
@@ -41,7 +41,7 @@ const restartStream = () => {
 
 // Обновление данных стрима
 const updateStreamData = () => {
-    router.patch(route('stream.data.update'), {
+    router.get(route('stream.data.update'), {
         preserveScroll: true,
         onSuccess: () => alert('Данные стрима обновлены')
     });
